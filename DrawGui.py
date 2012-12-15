@@ -16,6 +16,8 @@ import wx
 
 class CanvasPanel(wx.Panel):
     def __init__(self, parent):
+        ''' The gui will be organized into one vertical sizing box, and several horizontal ones. The
+        figure will be at the top, followed by space for user input and feedback'''
         self.parent = parent
         self.parent.SetSize((1000,1000))
         wx.Panel.__init__(self, parent)
@@ -96,9 +98,6 @@ class CanvasPanel(wx.Panel):
             self.progress_gauge.SetValue(percent)
             if percent >= 100:
                 break
-
-        #self.update()
-
 
 
 if __name__ == "__main__":
