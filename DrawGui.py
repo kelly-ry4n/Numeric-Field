@@ -89,13 +89,10 @@ class CanvasPanel(wx.Panel):
 
         self.canvas.draw()
         self.status_text.SetLabel('Render Finished')
-        print 'done'
 
     def threaded_progress_bar_update(self):
-        print 'WE HAVE A THREAD'
         while 1:
             percent = self.progress_q.get()
-            print percent
             self.progress_gauge.SetValue(percent)
             if percent >= 100:
                 break
