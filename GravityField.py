@@ -67,60 +67,58 @@ def plot_on_fig(fig, force_x,force_y, blob_x,blob_ys,blob_m=[], direc = 'sum_mag
 
 if __name__ == '__main__':
 
-    for i in xrange(300):
-        print '%s / %s' % (i, 300)
-        n = 0
+    n = 0
 
-        def progress_bar(curr,tot):
-            percent = int(curr*100/tot)
-            print '[' + '='*percent + ' '*(100-percent) + ']'
-            if percent == 100:
-                print 'Rendering Plot...'
+    def progress_bar(curr,tot):
+        percent = int(curr*100/tot)
+        print '[' + '='*percent + ' '*(100-percent) + ']'
+        if percent == 100:
+            print 'Rendering Plot...'
 
-        def mag(x1,x2,y1,y2):
-            return sqrt((x2-x1)**2+(y2-y1)**2.)
+    def mag(x1,x2,y1,y2):
+        return sqrt((x2-x1)**2+(y2-y1)**2.)
 
-        def test_force_x(x0,y0,xs,ys):
-            return sum([force_x(x0,x1,y0,y1) for x1,y1 in zip(xs,ys)])
+    def test_force_x(x0,y0,xs,ys):
+        return sum([force_x(x0,x1,y0,y1) for x1,y1 in zip(xs,ys)])
 
-        def test_force_y(x0,y0,xs,ys):
-            return sum([force_y(x0,x1,y0,y1) for x1,y1 in zip(xs,ys)])
+    def test_force_y(x0,y0,xs,ys):
+        return sum([force_y(x0,x1,y0,y1) for x1,y1 in zip(xs,ys)])
 
-        def force_x(x1,x2,y1,y2):
-            global n
-            n += 1
-            if n%100 == 0:
-                progress_bar(n,1000)
-            x_comp = cos(  arccos((x2-x1)/mag(x1,x2,y1,y2))  )/mag(x1,x2,y1,y2)
-            return x_comp
+    def force_x(x1,x2,y1,y2):
+        global n
+        n += 1
+        if n%100 == 0:
+            progress_bar(n,1000)
+        x_comp = (x2-x1)/mag(x1,x2,y1,y2)/mag(x1,x2,y1,y2)
+        return x_comp
 
-        def force_y(x1,x2,y1,y2):
-            y_comp = sin(  arcsin((y2-y1)/mag(x1,x2,y1,y2))  )/mag(x1,x2,y1,y2)
-            return y_comp
+    def force_y(x1,x2,y1,y2):
+        y_comp = (y2-y1)/mag(x1,x2,y1,y2)/mag(x1,x2,y1,y2)
+        return y_comp
 
-        def U_f(X,Y):
-            return -cos(arccos(X/sqrt(X**2+Y**2.)))/(X**2.+Y**2)
+    def U_f(X,Y):
+        return -cos(arccos(X/sqrt(X**2+Y**2.)))/(X**2.+Y**2)
 
-        def V_f(X,Y):
-            return -sin(arcsin(Y/sqrt(X**2+Y**2.)))/(X**2+Y**2.)
+    def V_f(X,Y):
+        return -sin(arcsin(Y/sqrt(X**2+Y**2.)))/(X**2+Y**2.)
 
-        num_particles = 500
-        blob_x = linspace(-10,10,num_particles)
+    num_particles = 500
+    blob_x = linspace(-10,10,num_particles)
 
-        y1 = linspace(-3,-3,10)
-        y2 = linspace(-3,-3,10)
+    y1 = linspace(-3,-3,10)
+    y2 = linspace(-3,-3,10)
 
-        blob_ys = [sin(blob_x)]
+    blob_ys = [sin(blob_x)]
 
-        #blob_ys = [[i for q in xrange(-5,5)] for i in xrange(-5,5)]
-        #blob_ys = [ones(num_particles) for i in linspace(-2,-2,num_particles)]
+    #blob_ys = [[i for q in xrange(-5,5)] for i in xrange(-5,5)]
+    #blob_ys = [ones(num_particles) for i in linspace(-2,-2,num_particles)]
 
-        # for i in blob_ys:
-        #     print i
-        #blob_y1 = blob_x ** 2
-        # blob_y2 = blob_x ** 3
+    # for i in blob_ys:
+    #     print i
+    #blob_y1 = blob_x ** 2
+    # blob_y2 = blob_x ** 3
 
 
-        fig = plt.figure(figsize=(23.5,13))
+    fig = plt.figure()
 
-        plot_on_fig(fig, test_force_x,test_force_y,blob_x,blob_ys, direc='sum_mag')
+    plot_on_fig(fig, test_force_x,test_force_y,blob_x,blob_ys, direc='sum_mag')

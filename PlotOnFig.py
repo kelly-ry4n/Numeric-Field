@@ -1,6 +1,4 @@
 from mpl_toolkits.mplot3d import Axes3D
-from matplotlib import cm
-from matplotlib.ticker import LinearLocator, FormatStrFormatter
 import matplotlib.pyplot as plt
 from numpy import sin, cos, abs, array, arange, meshgrid, divide, linspace, e, tan, dot
 import matplotlib.mlab as mlab
