@@ -108,7 +108,7 @@ if __name__ == '__main__':
     y1 = linspace(-3,-3,10)
     y2 = linspace(-3,-3,10)
 
-    blob_ys = [blob_x**3]
+    blob_ys = [blob_x**4 + -2*blob_x**3 - blob_x**2 + 1]
 
     #blob_ys = [[i for q in xrange(-5,5)] for i in xrange(-5,5)]
     #blob_ys = [ones(num_particles) for i in linspace(-2,-2,num_particles)]
