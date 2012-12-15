@@ -1,3 +1,4 @@
+"""Hello"""
 from numpy import arange, sin, pi
 from Queue import Queue
 from threading import Thread
