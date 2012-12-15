@@ -21,14 +21,12 @@ class CanvasPanel(wx.Panel):
         wx.Panel.__init__(self, parent)
         self.progress_q = Queue()
 
+        self.vertical_sizer = wx.BoxSizer(wx.VERTICAL) # Our main sizer
+
         self.figure = Figure()
         self.axes = self.figure.add_subplot(111)
         self.canvas = FigureCanvas(self, -1, self.figure)
 
-        self.update_fig_button = wx.Button(self, label='Update Figure')
-        self.update_fig_button.Bind(wx.EVT_BUTTON, self.update_fig_from_button)
-
-        self.vertical_sizer = wx.BoxSizer(wx.VERTICAL)
         self.vertical_sizer.Add(self.canvas, 1, wx.LEFT | wx.TOP | wx.GROW)
         self.vertical_sizer.Add((0,10))
 
@@ -54,6 +52,8 @@ class CanvasPanel(wx.Panel):
         self.vertical_sizer.Add(self.V_horizontal_sizer)
         self.vertical_sizer.Add((0,10))
 
+        self.update_fig_button = wx.Button(self, label='Update Figure')
+        self.update_fig_button.Bind(wx.EVT_BUTTON, self.update_fig_from_button)
 
         self.progress_gauge = wx.Gauge(self,wx.GA_HORIZONTAL|wx.EXPAND|wx.GROW,range=100)
         self.status_text = wx.StaticText(self,wx.RIGHT,label="Render Complete")
@@ -73,24 +73,11 @@ class CanvasPanel(wx.Panel):
 
         plot_on_fig(self.figure, 'cos(X)', 'Y', self.progress_q, 100, direc='sum')
 
-    def update_progress_bar(self):
-        t = Thread(target = self.threaded_progress_bar)
-        t.run()
-
-    def threaded_progress_bar(self):
-        print 'WE HAVE A THREAD'
-        while 1:
-            percent = self.progress_q.get()
-            print percent
-            self.progress_gauge.SetValue(percent)
-            if percent >= 100:
-                break
-
-
     def update_fig_from_button(self, e):
-        self.update_progress_bar()
-        t = Thread(target = self.start_fig_update)
-        t.run()
+        t1 = Thread(target = self.threaded_progress_bar_update)
+        t1.run()
+        t2 = Thread(target = self.start_fig_update)
+        t2.run()
 
     def start_fig_update(self):
 
@@ -103,6 +90,16 @@ class CanvasPanel(wx.Panel):
         self.canvas.draw()
         self.status_text.SetLabel('Render Finished')
         print 'done'
+
+    def threaded_progress_bar_update(self):
+        print 'WE HAVE A THREAD'
+        while 1:
+            percent = self.progress_q.get()
+            print percent
+            self.progress_gauge.SetValue(percent)
+            if percent >= 100:
+                break
+
         #self.update()
 
 

@@ -77,7 +77,7 @@ def plot_on_fig(fig, Ustr, Vstr, progress_q, res, direc = 'sum'):
     ax = fig.add_subplot(111)
     ax.clear()
 
-    ax.contourf(X,Y,W,1000)
+    ax.contourf(X,Y,W,100)
     #plt.contour(X,Y,W,10, linewidths=5)
     ax.quiver(Xq,Yq,Uq,Vq, pivot='mid')
     #plt.show()

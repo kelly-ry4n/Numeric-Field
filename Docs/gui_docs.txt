@@ -1,0 +1,54 @@
+
+DrawGUI.py
+    CanvasPanel : wx.Panel
+        '''The base GUI '''
+
+    def __init__(self,parent):
+        '''Initializes the GUI, calles update_fig'''
+
+    def update_fig(self):
+        ''' Calls PlotOnFig.plot_on_fig on canvas, updating the axis with the default functions'''
+
+    def update_fig_from_buton(self, e):
+        '''Calls threaded_progress_bar_update in its own thread.
+        Calls start_fig_update in its own thread'''
+
+    def start_fig_update(self):
+        ''' Gets values from U_input_field and V_input_field to be evaluated and plotted.
+        calls plot_on_fig on canvas with these values. Redrawns the canvas when finshed.'''
+
+
+                vertical_sizer : wx.BoxSizer
+                    '''Places children in order starting at the top, going to the bottom'''
+
+                    canvas : matplotlib.backends.backend_wxagg.FigureCanvas
+                        '''Canvas for drawing plots and graphs on using pyplot API'''
+
+                        axis : pyplot subplot
+                            '''axis to plot on'''
+
+                    U_horizontal_sizer : wx.BoxSizer
+                        ''' Horizontal sizer under the plotting figure.'''
+
+                        U_input_text : wx.StaticText
+                            ''' "Enter a function for U here" text'''
+
+                        U_input_field : wx.TextCtrl
+                            ''' Input box for getting U equations'''
+
+                    V_horizontal_sizer : wx.BoxSizer
+                        ''' Second horizontal sizer under the plotting figure'''
+
+                        V_input_text : wx.StaticText
+                            ''' "Enter a function for V here" text'''
+
+                        V_input_field : wx.TextCtrl
+                            ''' Input box for getting V equation'''
+
+                    bottom_horizontal_sizer : wx.BoxSizer
+                        ''' The bottom sizer for the gui'''
+
+                        update_fig_button: wx.Button
+                            '''Button which updates the vertical_sizer.canvas.axis plots. When pressed calls CanvasPanel.update_fig_from_button.'''
+
+

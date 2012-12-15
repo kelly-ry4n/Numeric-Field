@@ -1,0 +1,64 @@
+Files:
+    
+\---Numeric-Field
+    |   .gitignore
+    |   DrawGui.py
+    |   FieldCreator.py
+    |   FieldSolve.py
+    |   GravityField.py
+    |   PlotOnFig.py
+    |   README.md
+    |
+    \---Docs
+            gui_docs.txt
+            structure.txt
+
+DrawGui.py:
+    Contains a WX gui initialization and methods.
+
+    TODO: Fix threading
+
+    TODO: Fix progress bar stretch
+
+    TODO: Add console/logging
+
+
+GravityField.py
+    Currently plots gravitational fields to a pyplot plot.
+
+    TODO: Separate into multiple modules for math, different types of fields,
+    and move plotting functionality to PlotOnFig.py
+
+    TODO: Move functionality to FieldSolve.py
+
+PlotOnFig.py
+    Contains functions which given a figure will plot data. Currently gets functions to plot from caller.
+
+    TODO: Move computations to FieldSolve.py, leaving only plotting functionality.
+
+    TODO: Break different types of plots into different functions. Reduce number of parameters
+    by doing so.
+
+    TODO: Impliment 3d plotting
+
+    TODO: Add parameters to control contours, vectors, looks, etc.
+
+    TODO: Wrap this in a few different ways for different types of plots
+
+
+FieldSolve.py
+
+    TODO: Impliment this! For more than one type of field?
+
+    TODO: Improve accuracy?
+
+FieldCreator.py:
+    TODO: Impliment this!
+
+    TODO: Create functionality to quickly create various types of field initializations. For example:
+    - Rectangles of change, given density, position, size
+    - Circles of charge, given position, size
+    - 2d curves of chage, given functions
+    - 3d calculations? INSANITY
+
+    
