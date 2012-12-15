@@ -1,7 +1,5 @@
 from __future__ import division
 from mpl_toolkits.mplot3d import Axes3D
-from matplotlib import cm
-from matplotlib.ticker import LinearLocator, FormatStrFormatter
 import matplotlib.pyplot as plt
 from numpy import sin, cos, abs, array, arange, meshgrid, divide,\
 arccos, linspace, e, tan, dot, arcsin, sqrt, zeros, ones
@@ -97,10 +95,10 @@ if __name__ == '__main__':
         return y_comp
 
     def U_f(X,Y):
-        return -cos(arccos(X/sqrt(X**2+Y**2.)))/(X**2.+Y**2)
+        return -X/mag(X,0,Y,0)**2
 
     def V_f(X,Y):
-        return -sin(arcsin(Y/sqrt(X**2+Y**2.)))/(X**2+Y**2.)
+        return -Y/mag(X,0,Y,0)**2
 
     num_particles = 500
     blob_x = linspace(-10,10,num_particles)
