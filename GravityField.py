@@ -88,7 +88,7 @@ if __name__ == '__main__':
         global n
         n += 1
         if n%100 == 0:
-            progress_bar(n,5000)
+            progress_bar(n,2000)
         x_comp = cos(  arccos((x2-x1)/mag(x1,x2,y1,y2))  )/mag(x1,x2,y1,y2)
         return x_comp
 
@@ -102,18 +102,20 @@ if __name__ == '__main__':
     def V_f(X,Y):
         return -sin(arcsin(Y/sqrt(X**2+Y**2.)))/(X**2+Y**2.)
 
-    num_particles = 50
-    blob_x = linspace(-2,2,num_particles)
+    num_particles = 500
+    blob_x = linspace(-10,10,num_particles)
 
     y1 = linspace(-3,-3,10)
     y2 = linspace(-3,-3,10)
 
-    #blob_ys = [[i for q in xrange(-5,5)] for i in xrange(-5,5)]
-    blob_ys = [ones(num_particles) for i in linspace(-2,-2,num_particles)]
+    blob_ys = [blob_x**3]
 
-    for i in blob_ys:
-        print i
-    # blob_y1 = blob_x ** 2
+    #blob_ys = [[i for q in xrange(-5,5)] for i in xrange(-5,5)]
+    #blob_ys = [ones(num_particles) for i in linspace(-2,-2,num_particles)]
+
+    # for i in blob_ys:
+    #     print i
+    #blob_y1 = blob_x ** 2
     # blob_y2 = blob_x ** 3
 
 
