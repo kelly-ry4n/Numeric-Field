@@ -47,6 +47,8 @@ def force_field(fig, plot_type, vector_type, xd, yr, xs, ys, res=100):
         F_xq = test_force_x(Xq,Yq,xs,ys)
         F_yq = test_force_y(Xq,Yq,xs,ys)
 
+        plot_on_fig(fig, X, Y, Xq, Yq, F_x, F_y, F_xq, F_yq, direc=plot_type)
+
     if plot_type=='Contour Plot':
         ## Set up a meshgrid for calculating contours
         X = linspace(xd[0],xd[1], res)
@@ -56,6 +58,8 @@ def force_field(fig, plot_type, vector_type, xd, yr, xs, ys, res=100):
         ## Evaluate the meshgrid at point (X,Y) for contours
         F_x = test_force_x(X,Y,xs,ys)
         F_y = test_force_y(X,Y,xs,ys)
+
+        plot_on_fig(fig, None, None, Xq, Yq, None, None, F_xq, F_yq, direc=plot_type)
 
     if plot_type=='Vector Field':
         ## Set up a meshgrid for calculating vectors
@@ -67,7 +71,4 @@ def force_field(fig, plot_type, vector_type, xd, yr, xs, ys, res=100):
         F_xq = test_force_x(Xq,Yq,xs,ys)
         F_yq = test_force_y(Xq,Yq,xs,ys)
 
-
-
-    ## Pass values to plot_on_fig
-    plot_on_fig
+        plot_on_fig(fig, X, Y, None, None, F_x, F_y, None, None, direc=plot_type)
