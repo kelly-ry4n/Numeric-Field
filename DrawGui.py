@@ -69,26 +69,37 @@ class CanvasPanel(wx.Panel):
         self.vertical_sizer.Add(self.canvas, 1, wx.LEFT | wx.TOP | wx.GROW)
         self.vertical_sizer.Add((0,10))
 
-        self.U_horizontal_sizer = wx.BoxSizer(wx.HORIZONTAL)
-        self.U_input_text = wx.StaticText(self,label="Enter a function for U here:")
-        self.U_input_field= wx.TextCtrl(self)
-        self.U_input_field.ChangeValue('cos(X) + Y')
+        self.x_horizontal_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.U_horizontal_sizer.Add(self.U_input_text)
-        self.U_horizontal_sizer.Add(self.U_input_field)
-        self.U_horizontal_sizer.Add((10,0))
+        self.x_input_text = wx.StaticText(self,label="Plot Domain: (x1, x2):")
+        self.x1_input_field= wx.TextCtrl(self)
+        self.x2_input_field= wx.TextCtrl(self)
 
-        self.vertical_sizer.Add(self.U_horizontal_sizer)
+        self.x1_input_field.ChangeValue('-5')
+        self.x2_input_field.ChangeValue('5')
+
+        self.x_horizontal_sizer.Add(self.x_input_text)
+        self.x_horizontal_sizer.Add(self.x1_input_field)
+        self.x_horizontal_sizer.Add(self.x2_input_field)
+        self.x_horizontal_sizer.Add((10,0))
+
+        self.vertical_sizer.Add(self.x_horizontal_sizer)
         self.vertical_sizer.Add((0,10))
 
-        self.V_horizontal_sizer = wx.BoxSizer(wx.HORIZONTAL)
-        self.V_input_text = wx.StaticText(self,label="Enter a function for V here:")
-        self.V_input_field= wx.TextCtrl(self)
-        self.V_input_field.ChangeValue('sin(Y)')
-        self.V_horizontal_sizer.Add(self.V_input_text)
-        self.V_horizontal_sizer.Add(self.V_input_field)
+        self.y_horizontal_sizer = wx.BoxSizer(wx.HORIZONTAL)
+        self.y_input_text = wx.StaticText(self,label="Plot Range (y1,y2):    ")
 
-        self.vertical_sizer.Add(self.V_horizontal_sizer)
+        self.y2_input_field = wx.TextCtrl(self)
+        self.y1_input_field = wx.TextCtrl(self)
+
+        self.y1_input_field.ChangeValue('5')
+        self.y2_input_field.ChangeValue('-5')
+
+        self.y_horizontal_sizer.Add(self.y_input_text)
+        self.y_horizontal_sizer.Add(self.y1_input_field)
+        self.y_horizontal_sizer.Add(self.y2_input_field)
+
+        self.vertical_sizer.Add(self.y_horizontal_sizer)
         self.vertical_sizer.Add((0,10))
 
         self.update_fig_button = wx.Button(self, label='Update Figure')
@@ -125,9 +136,8 @@ class CanvasPanel(wx.Panel):
 
         self.status_text.SetLabel('Computing Field...')
 
-        Ustr = self.U_input_field.GetValue()
-        Vstr = self.U_input_field.GetValue()
-        plot_on_fig(self.figure, Ustr, Vstr, self.progress_q, 100, direc='sum')
+        # TODO Fix args to match and update
+        #plot_on_fig(self.figure, Ustr, Vstr, self.progress_q, 100, direc='sum')
 
         self.canvas.draw()
         self.status_text.SetLabel('Render Finished')
@@ -156,6 +166,3 @@ if __name__ == "__main__":
     panel.update_fig()
     fr.Show()
     app.MainLoop()
-
-
-
