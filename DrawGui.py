@@ -24,7 +24,43 @@ class CanvasPanel(wx.Panel):
         wx.Panel.__init__(self, parent)
         self.progress_q = Queue()
 
+        plot_type_choices = [
+                                'Contour Plot',
+                                'Vector Field',
+                                'Vector with Contour',
+                                '3d -- NOT IMPLIMENTED',
+                            ]
+
+        vector_drawing_choices = [
+                                    'Sum',
+                                    'Magnitude',
+                                    'Multiply',
+                                    'Vertical Divergence',
+                                    'Horizontal Divergence',
+                                    'Division Sum',
+                                    'Dot'
+                                    ]
+
+
+
         self.vertical_sizer = wx.BoxSizer(wx.VERTICAL) # Our main sizer
+
+
+        self.plot_type_selector = wx.ComboBox(  parent=self,
+                                                choices=plot_type_choices,
+                                                style=wx.CB_DROPDOWN|wx.CB_READONLY)
+        self.plot_type_selector.SetValue('Contour Plot')
+
+        self.vector_drawing_selector = wx.ComboBox(parent=self,
+                                                   choices=vector_drawing_choices,
+                                                   style = wx.CB_DROPDOWN|wx.CB_READONLY)
+        self.vector_drawing_selector.SetValue('Sum')
+
+        self.dropdown_sizer = wx.BoxSizer(wx.HORIZONTAL)
+
+        self.dropdown_sizer.Add(self.plot_type_selector)
+        self.dropdown_sizer.Add(self.vector_drawing_selector)
+        self.vertical_sizer.Add(self.dropdown_sizer)
 
         self.figure = Figure()
         self.axes = self.figure.add_subplot(111)
@@ -79,6 +115,7 @@ class CanvasPanel(wx.Panel):
 
     def update_fig_from_button(self, e):
         '''Spawns threads for math and progress bar so that the gui doesn't die'''
+        self.figure.clf()
         t1 = Thread(target = self.threaded_progress_bar_update)
         t1.run()
         t2 = Thread(target = self.start_fig_update)
@@ -119,3 +156,6 @@ if __name__ == "__main__":
     panel.update_fig()
     fr.Show()
     app.MainLoop()
+
+
+
