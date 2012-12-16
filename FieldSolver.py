@@ -5,10 +5,10 @@ def mag(x1,x2,y1,y2):
     return sqrt(  (x2-x1)**2. + (y2-y1)**2.  )
 
 def force_x(x1,x2,y1,y2):
-    return (x2-x1)/mag(x1,x2,y1,y2)**2
+    return (x2-x1)/mag(x1,x2,y1,y2)**3
 
 def force_y(x1,x2,y1,y2):
-    return (y2-y1)/mag(x1,x2,y1,y2)**2
+    return (y2-y1)/mag(x1,x2,y1,y2)**3
 
 def test_force_x(x0,y0,xs,ys):
     return sum([force_x(x0,x1,y0,y1) for x1,y1 in zip(xs,ys)])
@@ -42,12 +42,14 @@ def force_field(fig, plot_type, vector_type, xd, yr, xs, ys, res=100):
         ## Evaluate the meshgrid at point (X,Y) for contours
         F_x = test_force_x(X,Y,xs,ys)
         F_y = test_force_y(X,Y,xs,ys)
+        F = (F_x,F_y)
      
         ## Evaluate the meshgrid at point (X,Y) for vectors
         F_xq = test_force_x(Xq,Yq,xs,ys)
         F_yq = test_force_y(Xq,Yq,xs,ys)
+        Fq = (F_xq,F_yq)
 
-        plot_on_fig(fig, X, Y, Xq, Yq, F_x, F_y, F_xq, F_yq, res, direc=vector_type)
+        plot_on_fig(fig, X, Y, Xq, Yq, F, Fq, res, direc=vector_type)
 
     if plot_type=='Contour Plot':
         ## Set up a meshgrid for calculating contours
@@ -58,8 +60,9 @@ def force_field(fig, plot_type, vector_type, xd, yr, xs, ys, res=100):
         ## Evaluate the meshgrid at point (X,Y) for contours
         F_x = test_force_x(X,Y,xs,ys)
         F_y = test_force_y(X,Y,xs,ys)
+        F = (F_x,F_y)
 
-        plot_on_fig(fig, X, Y, None, None, F_x, F_y, None, None, res, direc=vector_type)
+        plot_on_fig(fig, X, Y, None, None, F, None, res, direc=vector_type)
 
     if plot_type=='Vector Field':
         ## Set up a meshgrid for calculating vectors
@@ -70,5 +73,6 @@ def force_field(fig, plot_type, vector_type, xd, yr, xs, ys, res=100):
         ## Evaluate the meshgrid at point (X,Y) for vectors
         F_xq = test_force_x(Xq,Yq,xs,ys)
         F_yq = test_force_y(Xq,Yq,xs,ys)
+        Fq = (F_xq,F_yq)
 
-        plot_on_fig(fig, None, None, Xq, Yq, None, None, F_xq, F_yq, res, direc=vector_type)
+        plot_on_fig(fig, None, None, Xq, Yq, None, Fq, res, direc=vector_type)

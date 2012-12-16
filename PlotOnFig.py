@@ -1,12 +1,22 @@
 import matplotlib.pyplot as plt
 from numpy import abs, array, divide, dot
 
-def plot_on_fig(fig, X, Y, Xq, Yq, F_x, F_y, F_xq, F_yq, res, direc = 'Sum'):
+def plot_on_fig(fig, X, Y, Xq, Yq, F, Fq, res, direc = 'Sum'):
+    """
+    'fig'--> figure object, X and Y are components of meshgrid, Xq and Yq are
+    components of the same meshgrid but at a fifth the resolution, 'F'--> 2-item tuple containing the
+    force in the x and y directions respectively, 'Fq' similar to 'F' but once again at a fifth the 
+    resolution, 'res' is oft mentioned resolution, and 'direc' --> string matching one of the dictionary
+    keys in 'plot_arrow_modes' below.
+    """
 
-    U = F_x
-    V = F_y
-    Uq = F_xq
-    Vq = F_yq
+    if X is not None:
+        U = F[0]
+        V = F[1]
+    
+    if Xq is not None:
+        Uq = Fq[0]
+        Vq = Fq[1]
     
     ## A few methods of computing UV 'magnitudes' for plotting the contours
     plot_arrow_modes = {
@@ -22,12 +32,9 @@ def plot_on_fig(fig, X, Y, Xq, Yq, F_x, F_y, F_xq, F_yq, res, direc = 'Sum'):
     ax = fig.add_subplot(111)
     ax.clear()
 
-    try:
-        W = plot_arrow_modes[direc]()
-    except TypeError:
-        pass
 
     if X is not None:
+        W = plot_arrow_modes[direc]()
         ax.contourf(X,Y,W,res)
     if Xq is not None:
         ax.quiver(Xq,Yq,Uq,Vq, pivot='mid')
