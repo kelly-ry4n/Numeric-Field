@@ -2,6 +2,7 @@
 from numpy import arange, sin, pi
 from Queue import Queue
 from threading import Thread
+import os, array
 
 import matplotlib
 matplotlib.use('WXAgg')     # matplotlib magic... I don't know what this does but I'm
@@ -58,13 +59,15 @@ class CanvasPanel(wx.Panel):
 
         self.dropdown_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.draw_charge_button = wx.Button(self,label='Charge Field Creator')
-        self.draw_charge_button.Bind(wx.EVT_BUTTON, self.start_charge_draw)
+        self.draw_charge_button = wx.Button(self,label='Load Charge Field')
+        self.draw_charge_button.SetSize((50,30))
+        self.draw_charge_button.Bind(wx.EVT_BUTTON, self.load_charge_field)
 
         self.dropdown_sizer.Add(self.plot_type_selector)
         self.dropdown_sizer.Add(self.vector_drawing_selector)
         self.dropdown_sizer.Add(self.draw_charge_button)
         self.vertical_sizer.Add(self.dropdown_sizer)
+        self.vertical_sizer.Add((0,3))
 
         self.figure = Figure()
         self.axes = self.figure.add_subplot(111)
@@ -131,10 +134,8 @@ class CanvasPanel(wx.Panel):
     def update_fig_from_button(self, e):
         '''Spawns threads for math and progress bar so that the gui doesn't die'''
         self.figure.clf()
-        t1 = Thread(target = self.threaded_progress_bar_update)
-        t1.run()
-        t2 = Thread(target = self.start_fig_update)
-        t2.run()
+        t = Thread(target = self.start_fig_update)
+        t.run()
 
     def start_fig_update(self):
 
@@ -153,20 +154,36 @@ class CanvasPanel(wx.Panel):
             if percent >= 100:
                 break
 
-    def start_charge_draw(self,e):
-        #draw_window = Windows.DrawWindow()
-        draw_window.MainLoop
+    def load_charge_field(self,e):
+        wildcard = "BMP map (*.bmp)|*.bmp"
+        open_dlg = wx.FileDialog(
+            self, message = 'Choose file',
+            defaultDir=os.getcwd(),
+            defaultFile="",
+            wildcard=wildcard,
+            style=wx.OPEN | wx.MULTIPLE | wx.CHANGE_DIR
+            )
+
+        if open_dlg.ShowModal() == wx.ID_OK:
+            path = open_dlg.GetPaths()[0]
+            values = array.array('l')
+
+            try:
+                with open(path) as f:
+                    values.fromfile(f,10000)
+            except EOFError:
+                pass
+            finally:
+                print values
+
+
+            
+
+        open_dlg.Destroy()
+        
 
 
 if __name__ == "__main__":
-
-    def U_f(X,Y):
-        from numpy import cos, sin
-        return sin(X)
-
-    def V_f(X,Y):
-        from numpy import cos, sin
-        return cos(Y)
 
     app = wx.PySimpleApp()
     fr = wx.Frame(None, title='test')
