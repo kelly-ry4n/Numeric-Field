@@ -13,6 +13,7 @@ from matplotlib.backends.backend_wx import NavigationToolbar2Wx
 from matplotlib.figure import Figure
 
 from FieldSolver import force_field
+from PlotOnFig import plot_on_fig
 
 import wx
 
@@ -148,7 +149,7 @@ class CanvasPanel(wx.Panel):
         vector_type = self.vector_drawing_selector.GetValue()
 
         force_field(self.figure, plot_type, vector_type,
-                    domain_x, range_y,[[1]],[[1]], self.progress_q, 100)
+                    domain_x, range_y,[[1]],[[1]], 100)
 
         self.canvas.draw()
         self.status_text.SetLabel('Render Finished')
