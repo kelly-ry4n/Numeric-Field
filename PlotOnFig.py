@@ -11,7 +11,7 @@ def plot_on_fig(fig, Ustr, Vstr, progress_q, res, direc = 'sum'):
     ## TODO: move to function kwargs
     x1,x2 = -5,5
     y1,y2 = -5,5
-    res = 1000
+    res = 100
     resq = 20
     dt = 0.01
     t = 0
