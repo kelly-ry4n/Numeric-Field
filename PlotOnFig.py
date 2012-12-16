@@ -10,13 +10,13 @@ def plot_on_fig(fig, X, Y, Xq, Yq, F_x, F_y, F_xq, F_yq, res, direc = 'Sum'):
     
     ## A few methods of computing UV 'magnitudes' for plotting the contours
     plot_arrow_modes = {
-                            'sum_mag'   : lambda: abs(U)+abs(V),
-                            'Sum'       : lambda: U+V          ,
-                            'dot'       : lambda: dot(U,V)     ,
-                            'mul'       : lambda: V*U          ,
-                            'div_vert'  : lambda: V/U          ,
-                            'div_hori'  : lambda: U/V          ,
-                            'div_sum'   : lambda: V/U + U/V    ,
+                            'Magnitude'              : lambda: abs(U)+abs(V),
+                            'Sum'                    : lambda: U+V          ,
+                            'Dot'                    : lambda: dot(U,V)     ,
+                            'Multiply'               : lambda: V*U          ,
+                            'Vertical Divergence'    : lambda: V/U          ,
+                            'Horizontal Divergence'  : lambda: U/V          ,
+                            'Division Sum'           : lambda: V/U + U/V    ,
                         }
 
     ax = fig.add_subplot(111)
