@@ -20,7 +20,7 @@ class CanvasPanel(wx.Panel):
         ''' The gui will be organized into one vertical sizing box, and several horizontal ones. The
         figure will be at the top, followed by space for user input and feedback'''
         self.parent = parent
-        self.parent.SetSize((1000,1000))
+        self.parent.SetSize((600,600))
         wx.Panel.__init__(self, parent)
         self.progress_q = Queue()
 
