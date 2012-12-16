@@ -15,15 +15,23 @@ def test_force_x(x0,y0,xs,ys):
 def test_force_y(x0,y0,xs,ys):
     return sum([force_y(x0,x1,y0,y1) for x1,y1 in zip(xs,ys)])
 
-def U_f(X,Y):
-    return -X/mag(X,0,Y,0)**2
-
-def V_f(X,Y):
-    return -Y/mag(X,0,Y,0)**2
 
 
 def force_field(fig, plot_type, vector_type, xd, yr, res=0.1, xs, ys):
-    x=linspace(xd[0],xd[1], res)
-    y=linspace(yr[0], yr[1], res)
-    xy=meshgrid(x,y)
+    """
+    Function takes 'fig'(figure object) to plot to, the kind of 'plot_type' and vector_type',
+    'xd' being a tuple with the domain of x, 'yr' being a tuple with the range of y,
+    'res' as a float being the resolution in the x and y, and finally 'xs' and 'ys' as
+    a list of arrays defining some blob
+    """
+    
+    ## Make our bouonds on the graph
+    X = linspace(xd[0],xd[1], res)
+    Y = linspace(yr[0], yr[1], res)
+    X, Y = meshgrid(X,Y)
 
+    ## Evaluate the meshgrid at point (X,Y) for 
+    F_x = test_force_x(X,Y,xs,ys)
+    F_y = test_force_y(X,Y,xs,ys)
+
+    ## Pass values to plot_on_fig
