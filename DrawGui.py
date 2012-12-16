@@ -12,7 +12,7 @@ from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 from matplotlib.backends.backend_wx import NavigationToolbar2Wx
 from matplotlib.figure import Figure
 
-from PlotOnFig import plot_on_fig
+from FieldSolver import force_field
 
 import wx
 
@@ -133,6 +133,7 @@ class CanvasPanel(wx.Panel):
 
     def update_fig_from_button(self, e):
         '''Spawns threads for math and progress bar so that the gui doesn't die'''
+
         self.figure.clf()
         t = Thread(target = self.start_fig_update)
         t.run()
@@ -141,8 +142,13 @@ class CanvasPanel(wx.Panel):
 
         self.status_text.SetLabel('Computing Field...')
 
-        # TODO Fix args to match and update
-        #plot_on_fig(self.figure, Ustr, Vstr, self.progress_q, 100, direc='sum')
+        domain_x = (float(self.x1_input_field.GetValue()),float(self.x2_input_field.GetValue()))
+        range_y = (float(self.y1_input_field.GetValue()),float(self.y2_input_field.GetValue()))
+        plot_type= self.plot_type_selector.GetValue()
+        vector_type = self.vector_drawing_selector.GetValue()
+
+        force_field(self.figure, plot_type, vector_type,
+                    domain_x, range_y,[[1]],[[1]], self.progress_q, 100)
 
         self.canvas.draw()
         self.status_text.SetLabel('Render Finished')
