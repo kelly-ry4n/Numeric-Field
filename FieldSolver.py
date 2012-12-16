@@ -59,7 +59,6 @@ def force_field(fig, plot_type, vector_type, xd, yr, xs, ys, res=100):
         F_x = test_force_x(X,Y,xs,ys)
         F_y = test_force_y(X,Y,xs,ys)
 
-        print vector_type
         plot_on_fig(fig, X, Y, None, None, F_x, F_y, None, None, res, direc=vector_type)
 
     if plot_type=='Vector Field':
