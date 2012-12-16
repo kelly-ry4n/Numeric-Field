@@ -87,11 +87,11 @@ if __name__ == '__main__':
         n += 1
         if n%100 == 0:
             progress_bar(n,1000)
-        x_comp = (x2-x1)/mag(x1,x2,y1,y2)/mag(x1,x2,y1,y2)
+        x_comp = (x2-x1)/mag(x1,x2,y1,y2)**2
         return x_comp
 
     def force_y(x1,x2,y1,y2):
-        y_comp = (y2-y1)/mag(x1,x2,y1,y2)/mag(x1,x2,y1,y2)
+        y_comp = (y2-y1)/mag(x1,x2,y1,y2)**2
         return y_comp
 
     def U_f(X,Y):
