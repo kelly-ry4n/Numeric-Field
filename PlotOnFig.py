@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from numpy import abs, array, divide, dot
 
-def plot_on_fig(fig, X, Y, Xq, Yq, F_x, F_y, F_xq, F_yq, direc = 'sum'):
+def plot_on_fig(fig, X, Y, Xq, Yq, F_x, F_y, F_xq, F_yq, res, direc = 'Sum'):
 
     U = F_x
     V = F_y
@@ -11,7 +11,7 @@ def plot_on_fig(fig, X, Y, Xq, Yq, F_x, F_y, F_xq, F_yq, direc = 'sum'):
     ## A few methods of computing UV 'magnitudes' for plotting the contours
     plot_arrow_modes = {
                             'sum_mag'   : lambda: abs(U)+abs(V),
-                            'sum'       : lambda: U+V          ,
+                            'Sum'       : lambda: U+V          ,
                             'dot'       : lambda: dot(U,V)     ,
                             'mul'       : lambda: V*U          ,
                             'div_vert'  : lambda: V/U          ,
@@ -22,12 +22,15 @@ def plot_on_fig(fig, X, Y, Xq, Yq, F_x, F_y, F_xq, F_yq, direc = 'sum'):
     ax = fig.add_subplot(111)
     ax.clear()
 
-    if Xq:
-    W = plot_arrow_modes[direc]()
-    ax.quiver(Xq,Yq,Uq,Vq, pivot='mid')
+    try:
+        W = plot_arrow_modes[direc]()
+    except TypeError:
+        pass
 
-    if X:
-    ax.contourf(X,Y,W,res)
+    if X is not None:
+        ax.contourf(X,Y,W,res)
+    if Xq is not None:
+        ax.quiver(Xq,Yq,Uq,Vq, pivot='mid')
     
 
 if __name__ == '__main__':
