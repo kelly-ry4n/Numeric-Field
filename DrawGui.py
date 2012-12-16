@@ -72,10 +72,12 @@ class CanvasPanel(wx.Panel):
         self.Fit()
 
     def update_fig(self):
+        '''Sends the figure to some math and plotting, comes back with a new image'''
 
         plot_on_fig(self.figure, 'cos(X)', 'Y', self.progress_q, 100, direc='sum')
 
     def update_fig_from_button(self, e):
+        '''Spawns threads for math and progress bar so that the gui doesn't die'''
         t1 = Thread(target = self.threaded_progress_bar_update)
         t1.run()
         t2 = Thread(target = self.start_fig_update)

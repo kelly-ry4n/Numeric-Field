@@ -11,7 +11,7 @@ def plot_on_fig(fig, Ustr, Vstr, progress_q, res, direc = 'sum'):
     ## TODO: move to function kwargs
     x1,x2 = -5,5
     y1,y2 = -5,5
-    res = res
+    res = 1000
     resq = 20
     dt = 0.01
     t = 0
@@ -90,7 +90,7 @@ def plot_on_fig(fig, Ustr, Vstr, progress_q, res, direc = 'sum'):
     ax = fig.add_subplot(111)
     ax.clear()
 
-    ax.contourf(X,Y,W,100)
+    ax.contourf(X,Y,W,res)
     ax.quiver(Xq,Yq,Uq,Vq, pivot='mid')
 
 if __name__ == '__main__':
