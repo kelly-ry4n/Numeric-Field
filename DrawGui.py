@@ -58,8 +58,12 @@ class CanvasPanel(wx.Panel):
 
         self.dropdown_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
+        self.draw_charge_button = wx.Button(self,label='Charge Field Creator')
+        self.draw_charge_button.Bind(wx.EVT_BUTTON, self.start_charge_draw)
+
         self.dropdown_sizer.Add(self.plot_type_selector)
         self.dropdown_sizer.Add(self.vector_drawing_selector)
+        self.dropdown_sizer.Add(self.draw_charge_button)
         self.vertical_sizer.Add(self.dropdown_sizer)
 
         self.figure = Figure()
@@ -148,6 +152,10 @@ class CanvasPanel(wx.Panel):
             self.progress_gauge.SetValue(percent)
             if percent >= 100:
                 break
+
+    def start_charge_draw(self,e):
+        #draw_window = Windows.DrawWindow()
+        draw_window.MainLoop
 
 
 if __name__ == "__main__":
