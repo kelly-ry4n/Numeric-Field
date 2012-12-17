@@ -207,7 +207,7 @@ class CanvasPanel(wx.Panel):
 if __name__ == "__main__":
 
     app = wx.PySimpleApp()
-    fr = wx.Frame(None, title='test')
+    fr = wx.Frame(None, title='Field Plot')
     panel = CanvasPanel(fr)
     panel.update_fig()
     fr.Show()
