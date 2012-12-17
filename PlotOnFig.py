@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from numpy import abs, array, divide, dot, max, min, linspace, log
+from numpy import abs, array, divide, dot, max, min, linspace, log, sqrt
 
 
 
@@ -15,7 +15,7 @@ def plot_on_fig(fig, X, Y, Xq, Yq, F, Fq, res, direc = 'Sum'):
     """
     ## A few methods of computing UV 'magnitudes' for plotting the contours
     plot_arrow_modes = {
-                            'Magnitude'              : lambda: abs(U)+abs(V),
+                            'Magnitude'        : lambda: sqrt(U**2+V**2)   ,
                             'Sum'                    : lambda: U+V          ,
                             'Dot'                    : lambda: dot(U,V)     ,
                             'Multiply'               : lambda: V*U          ,
