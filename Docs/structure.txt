@@ -33,10 +33,7 @@ FieldSolver.py
 
     TODO: 3d
 
-    TODO: Impliment this! For more than one type of field?
-                    This has been "implemented", field solver now takes in what kind of field it is and the charge of the blob,
-                    however it doesn't seem to be plotting the changes. Might have to do with the function call in DrawGui.py (line 151-152)
-                    not being updated, but it crashes as soon as I change anything :(
+    TODO: More than one magnitude of charge? Right now it just makes all charges be the same mag
 
     TODO: Improve accuracy?
 
