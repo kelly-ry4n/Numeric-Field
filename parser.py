@@ -10,7 +10,11 @@ from numpy import linspace
 ## 
 ## <arg>  ->    *variable-name | *number
 
-def parse_dsl(prog):
+def parse_dsl(prog,gui_help_msg):
+
+    if prog == 'help':
+        gui_help_msg()
+        return None
 
     points_x = []
     points_y = []

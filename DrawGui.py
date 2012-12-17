@@ -1,7 +1,7 @@
 from numpy import arange, sin, pi
 from Queue import Queue
 from threading import Thread
-import os, array
+import os, array, sys, traceback
 
 import matplotlib
 matplotlib.use('WXAgg')     # matplotlib magic... I don't know what this does but I'm
@@ -139,13 +139,31 @@ rectangle(-4,-4,x,x,16)'''
         self.bottom_horizontal_sizer.Add(self.status_text)
         self.vertical_sizer.Add(self.bottom_horizontal_sizer)
 
+        self.output_text_ctrl= wx.TextCtrl(self,style = wx.TE_MULTILINE|wx.TE_READONLY,
+                                            size = (620,75))
+        self.output_text_ctrl.ChangeValue('Console..')
         self.input_text_ctrl = wx.TextCtrl(self,style = wx.TE_MULTILINE, size = (620,100))
         self.input_text_ctrl.ChangeValue(default_input_text)
         self.vertical_sizer.Add(self.input_text_ctrl)
+        self.vertical_sizer.Add(self.output_text_ctrl)
         self.vertical_sizer.Add((0,10))
 
         self.SetSizer(self.vertical_sizer)
         self.Fit()
+
+    def display_help_msg_callback(self):
+        helpstr = \
+'''Statements:
+var(<name>,number)              -   Assigns number to <name>
+point(x,y)                      -   Creates a point of charge at x,y
+line(x1,y2, x2,y2, numpoints)   -   Creates a line of charge from one point to another\
+with numpoint points
+rectangle(x1,y1,x2,y2,res)      -   Create a rectangle bounded by two corner points\
+ where the charge density is related to res'''
+        self.set_console_msg(helpstr)
+
+    def set_console_msg(self,msg):
+        self.output_text_ctrl.ChangeValue(msg)
 
     def update_fig(self):
         '''Sends the figure to some math and plotting, comes back with a new image'''
@@ -170,13 +188,22 @@ rectangle(-4,-4,x,x,16)'''
         vector_type = self.vector_drawing_selector.GetValue()
         field_type = self.field_type_selector.GetValue()
 
-        xs, ys = parse_dsl(self.input_text_ctrl.GetValue())
+        xs, ys = parse_dsl(self.input_text_ctrl.GetValue(),self.display_help_msg_callback)
 
-        force_field(self.figure, plot_type, vector_type,
-                    domain_x, range_y,xs,ys,field_type, res = 100)
+        if xs == []:
+            self.set_console_msg('Input cannot be empty!\
+                                 Update with "help" for commands')
 
-        self.canvas.draw()
-        self.status_text.SetLabel('Render Finished')
+        elif xs == None:
+            pass
+
+        else:
+
+            force_field(self.figure, plot_type, vector_type,
+                        domain_x, range_y,xs,ys,field_type, res = 100)
+
+            self.canvas.draw()
+            self.status_text.SetLabel('Render Finished')
 
     def threaded_progress_bar_update(self):
         while 1:
@@ -206,8 +233,6 @@ rectangle(-4,-4,x,x,16)'''
                 pass
             finally:
                 print values
-
-
             
 
         open_dlg.Destroy()
@@ -216,9 +241,15 @@ rectangle(-4,-4,x,x,16)'''
 
 if __name__ == "__main__":
 
-    app = wx.PySimpleApp()
-    fr = wx.Frame(None, title='Field Plot')
-    panel = CanvasPanel(fr)
-    panel.update_fig()
-    fr.Show()
-    app.MainLoop()
+    try:
+        app = wx.PySimpleApp()
+        fr = wx.Frame(None, title='Field Plot')
+        panel = CanvasPanel(fr)
+        panel.update_fig()
+        fr.Show()
+        app.MainLoop()
+
+    except Exception as Exc:
+        print '\n\n\n'
+        traceback.print_exc(file=sys.stdout)
+        raw_input('\n\n\nPress any key to continue')
