@@ -1,3 +1,4 @@
+from __future__ import division
 import string
 from numpy import linspace
 ## <expr> ->    <shape> | <declaration>
