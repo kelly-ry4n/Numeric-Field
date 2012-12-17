@@ -93,8 +93,8 @@ class CanvasPanel(wx.Panel):
         self.x1_input_field= wx.TextCtrl(self)
         self.x2_input_field= wx.TextCtrl(self)
 
-        self.x1_input_field.ChangeValue('-5')
-        self.x2_input_field.ChangeValue('5')
+        self.x1_input_field.ChangeValue('0')
+        self.x2_input_field.ChangeValue('3')
 
         self.x_horizontal_sizer.Add(self.x_input_text)
         self.x_horizontal_sizer.Add(self.x1_input_field)
@@ -110,8 +110,8 @@ class CanvasPanel(wx.Panel):
         self.y2_input_field = wx.TextCtrl(self)
         self.y1_input_field = wx.TextCtrl(self)
 
-        self.y1_input_field.ChangeValue('5')
-        self.y2_input_field.ChangeValue('-5')
+        self.y1_input_field.ChangeValue('0')
+        self.y2_input_field.ChangeValue('3')
 
         self.y_horizontal_sizer.Add(self.y_input_text)
         self.y_horizontal_sizer.Add(self.y1_input_field)
@@ -163,7 +163,7 @@ class CanvasPanel(wx.Panel):
         print field_type
 
         force_field(self.figure, plot_type, vector_type,
-                    domain_x, range_y,[[1]],[[1]], 100,field_type)
+                    domain_x, range_y,[[1],[2]],[[1],[2]],field_type, res = 100)
 
         self.canvas.draw()
         self.status_text.SetLabel('Render Finished')

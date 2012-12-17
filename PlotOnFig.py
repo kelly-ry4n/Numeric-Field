@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from numpy import abs, array, divide, dot
+from numpy import abs, array, divide, dot, max, min, linspace, log
 
 def plot_on_fig(fig, X, Y, Xq, Yq, F, Fq, res, direc = 'Sum'):
     """
@@ -35,7 +35,8 @@ def plot_on_fig(fig, X, Y, Xq, Yq, F, Fq, res, direc = 'Sum'):
 
     if X is not None:
         W = plot_arrow_modes[direc]()
-        ax.contourf(X,Y,W,res)
+        W = log(abs(W))
+        ax.contour(X,Y,W,res)
     if Xq is not None:
         ax.quiver(Xq,Yq,Uq,Vq, pivot='mid')
     

@@ -1,3 +1,4 @@
+from __future__ import division
 from numpy import sqrt, linspace, meshgrid, array
 from PlotOnFig import plot_on_fig
 
