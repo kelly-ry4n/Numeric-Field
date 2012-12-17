@@ -82,7 +82,7 @@ def force_field(fig, plot_type, vector_type, xd, yr, xs, ys,
             F_x = F_x*(6.67384e-11)*abs(charge)
             F_y = F_y*(6.67384e-11)*abs(charge)
         elif field_type=='Electric':
-            F_x = F_x*(8.98755e9)*charge, 
+            F_x = F_x*(8.98755e9)*charge
             F_y = F_y*(8.98755e9)*charge
 
         F = (F_x,F_y)
