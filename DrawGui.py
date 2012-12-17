@@ -13,6 +13,7 @@ from matplotlib.figure import Figure
 
 from FieldSolver import force_field
 from PlotOnFig import plot_on_fig
+from Parser import parse_dsl
 
 import wx
 
@@ -23,7 +24,11 @@ class CanvasPanel(wx.Panel):
         self.parent = parent
         self.parent.SetSize((640,600))
         wx.Panel.__init__(self, parent)
-        self.progress_q = Queue()
+        default_input_text = \
+'''var(x,0)
+point(3,4)
+line(-4,4,4,-2,5)
+rectangle(-4,-4,x,x,16)'''
 
         plot_type_choices = [
                                 'Contour Plot',
@@ -33,8 +38,8 @@ class CanvasPanel(wx.Panel):
                             ]
 
         vector_drawing_choices = [
-                                    'Sum',
                                     'Magnitude',
+                                    'Sum',
                                     'Multiply',
                                     'Vertical Divergence',
                                     'Horizontal Divergence',
@@ -60,7 +65,7 @@ class CanvasPanel(wx.Panel):
         self.vector_drawing_selector = wx.ComboBox(parent=self,
                                                    choices=vector_drawing_choices,
                                                    style = wx.CB_DROPDOWN|wx.CB_READONLY)
-        self.vector_drawing_selector.SetValue('Sum')
+        self.vector_drawing_selector.SetValue('Magnitude')
 
         self.field_type_selector = wx.ComboBox(  parent=self,
                                                  choices= field_type_choices,
@@ -93,8 +98,8 @@ class CanvasPanel(wx.Panel):
         self.x1_input_field= wx.TextCtrl(self)
         self.x2_input_field= wx.TextCtrl(self)
 
-        self.x1_input_field.ChangeValue('0')
-        self.x2_input_field.ChangeValue('3')
+        self.x1_input_field.ChangeValue('-5')
+        self.x2_input_field.ChangeValue('5')
 
         self.x_horizontal_sizer.Add(self.x_input_text)
         self.x_horizontal_sizer.Add(self.x1_input_field)
@@ -110,8 +115,8 @@ class CanvasPanel(wx.Panel):
         self.y2_input_field = wx.TextCtrl(self)
         self.y1_input_field = wx.TextCtrl(self)
 
-        self.y1_input_field.ChangeValue('0')
-        self.y2_input_field.ChangeValue('3')
+        self.y1_input_field.ChangeValue('-5')
+        self.y2_input_field.ChangeValue('5')
 
         self.y_horizontal_sizer.Add(self.y_input_text)
         self.y_horizontal_sizer.Add(self.y1_input_field)
@@ -133,6 +138,11 @@ class CanvasPanel(wx.Panel):
         self.bottom_horizontal_sizer.Add((10,0))
         self.bottom_horizontal_sizer.Add(self.status_text)
         self.vertical_sizer.Add(self.bottom_horizontal_sizer)
+
+        self.input_text_ctrl = wx.TextCtrl(self,style = wx.TE_MULTILINE, size = (620,100))
+        self.input_text_ctrl.ChangeValue(default_input_text)
+        self.vertical_sizer.Add(self.input_text_ctrl)
+        self.vertical_sizer.Add((0,10))
 
         self.SetSizer(self.vertical_sizer)
         self.Fit()
@@ -160,10 +170,12 @@ class CanvasPanel(wx.Panel):
         vector_type = self.vector_drawing_selector.GetValue()
         field_type = self.field_type_selector.GetValue()
 
+        xs, ys = parse_dsl(self.input_text_ctrl.GetValue())
+
         print field_type
 
         force_field(self.figure, plot_type, vector_type,
-                    domain_x, range_y,[1,2,3],[1,2,0],field_type, res = 100)
+                    domain_x, range_y,xs,ys,field_type, res = 100)
 
         self.canvas.draw()
         self.status_text.SetLabel('Render Finished')
