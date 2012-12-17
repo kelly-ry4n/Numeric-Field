@@ -84,5 +84,3 @@ def parse_dsl(prog):
     parse(prog)
 
     return points_x, points_y
-
-print zip(points_x,points_y)

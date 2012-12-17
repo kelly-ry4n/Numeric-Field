@@ -163,7 +163,7 @@ class CanvasPanel(wx.Panel):
         print field_type
 
         force_field(self.figure, plot_type, vector_type,
-                    domain_x, range_y,[[1],[2]],[[1],[2]],field_type, res = 100)
+                    domain_x, range_y,[1,2,3],[1,2,0],field_type, res = 100)
 
         self.canvas.draw()
         self.status_text.SetLabel('Render Finished')

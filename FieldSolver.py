@@ -30,7 +30,6 @@ def force_field(fig, plot_type, vector_type, xd, yr, xs, ys,
     field_type is a string stating which calcuations to do (either Gravitational or Electric), charge is float
     dictating the overall charge of the blob (negative charges are abs() when using Gravitational)
     """
-    
     if plot_type=='Vector with Contour':
         ## Calculate both meshgrids for vectors and contours
 
