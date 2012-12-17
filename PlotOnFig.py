@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
 from numpy import abs, array, divide, dot, max, min, linspace, log
 
+
+
+
+
 def plot_on_fig(fig, X, Y, Xq, Yq, F, Fq, res, direc = 'Sum'):
     """
     'fig'--> figure object, X and Y are components of meshgrid, Xq and Yq are
@@ -9,15 +13,6 @@ def plot_on_fig(fig, X, Y, Xq, Yq, F, Fq, res, direc = 'Sum'):
     resolution, 'res' is oft mentioned resolution, and 'direc' --> string matching one of the dictionary
     keys in 'plot_arrow_modes' below.
     """
-
-    if X is not None:
-        U = F[0]
-        V = F[1]
-    
-    if Xq is not None:
-        Uq = Fq[0]
-        Vq = Fq[1]
-    
     ## A few methods of computing UV 'magnitudes' for plotting the contours
     plot_arrow_modes = {
                             'Magnitude'              : lambda: abs(U)+abs(V),
@@ -32,14 +27,19 @@ def plot_on_fig(fig, X, Y, Xq, Yq, F, Fq, res, direc = 'Sum'):
     ax = fig.add_subplot(111)
     ax.clear()
 
-
     if X is not None:
+        U = F[0]
+        V = F[1]
         W = plot_arrow_modes[direc]()
         W = log(abs(W))
         ax.contour(X,Y,W,res)
-    if Xq is not None:
-        ax.quiver(Xq,Yq,Uq,Vq, pivot='mid')
     
+    if Xq is not None:
+        Uq = Fq[0]
+        Vq = Fq[1]
+        ax.quiver(Xq,Yq,Uq,Vq, pivot='mid')
+
+
 
 if __name__ == '__main__':
     import Queue
