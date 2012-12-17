@@ -18,7 +18,8 @@ def test_force_y(x0,y0,xs,ys):
 
 
 
-def force_field(fig, plot_type, vector_type, xd, yr, xs, ys, field_type='Electric', charge=-0.001, res=100):
+def force_field(fig, plot_type, vector_type, xd, yr, xs, ys,
+                 field_type, charge=-0.001, res=100):
     """
     Function takes 'fig'(figure object) to plot to, the kind of 'plot_type' and vector_type',
     'xd' being a tuple with the domain of x, 'yr' being a tuple with the range of y,

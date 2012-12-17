@@ -21,7 +21,7 @@ class CanvasPanel(wx.Panel):
         ''' The gui will be organized into one vertical sizing box, and several horizontal ones. The
         figure will be at the top, followed by space for user input and feedback'''
         self.parent = parent
-        self.parent.SetSize((600,600))
+        self.parent.SetSize((640,600))
         wx.Panel.__init__(self, parent)
         self.progress_q = Queue()
 
@@ -42,6 +42,11 @@ class CanvasPanel(wx.Panel):
                                     'Dot'
                                     ]
 
+        field_type_choices = [
+                                'Gravitational',
+                                'Electric'
+        ]
+
 
 
         self.vertical_sizer = wx.BoxSizer(wx.VERTICAL) # Our main sizer
@@ -57,6 +62,11 @@ class CanvasPanel(wx.Panel):
                                                    style = wx.CB_DROPDOWN|wx.CB_READONLY)
         self.vector_drawing_selector.SetValue('Sum')
 
+        self.field_type_selector = wx.ComboBox(  parent=self,
+                                                 choices= field_type_choices,
+                                                 style = wx.CB_DROPDOWN|wx.CB_READONLY)
+        self.field_type_selector.SetValue('Gravitational')
+
         self.dropdown_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         self.draw_charge_button = wx.Button(self,label='Load Charge Field')
@@ -65,6 +75,7 @@ class CanvasPanel(wx.Panel):
 
         self.dropdown_sizer.Add(self.plot_type_selector)
         self.dropdown_sizer.Add(self.vector_drawing_selector)
+        self.dropdown_sizer.Add(self.field_type_selector)
         self.dropdown_sizer.Add(self.draw_charge_button)
         self.vertical_sizer.Add(self.dropdown_sizer)
         self.vertical_sizer.Add((0,3))
@@ -147,9 +158,12 @@ class CanvasPanel(wx.Panel):
         range_y = (float(self.y1_input_field.GetValue()),float(self.y2_input_field.GetValue()))
         plot_type= self.plot_type_selector.GetValue()
         vector_type = self.vector_drawing_selector.GetValue()
+        field_type = self.field_type_selector.GetValue()
+
+        print field_type
 
         force_field(self.figure, plot_type, vector_type,
-                    domain_x, range_y,[[1]],[[1]], 100)
+                    domain_x, range_y,[[1]],[[1]], 100,field_type)
 
         self.canvas.draw()
         self.status_text.SetLabel('Render Finished')
