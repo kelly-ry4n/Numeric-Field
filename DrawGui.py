@@ -172,8 +172,6 @@ rectangle(-4,-4,x,x,16)'''
 
         xs, ys = parse_dsl(self.input_text_ctrl.GetValue())
 
-        print field_type
-
         force_field(self.figure, plot_type, vector_type,
                     domain_x, range_y,xs,ys,field_type, res = 100)
 
