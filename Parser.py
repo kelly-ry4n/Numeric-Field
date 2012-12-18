@@ -1,6 +1,6 @@
 from __future__ import division
 import string
-from numpy import linspace, sin, cos, tan, pi, exp
+from numpy import linspace, sin, cos, tan, pi, exp, log, log10
 from mathparse import math_parse
 ## <expr> ->    <shape> | <declaration>
 ##
