@@ -244,7 +244,7 @@ rectangle(x1,y1,x2,y2,res)      -   Create a rectangle bounded by two corner poi
         wildcard = "Files (*.*)|*.*"
         open_dlg = wx.FileDialog(
             self, message = 'Choose file',
-            defaultDir=os.getcwd(),
+            defaultDir=os.getcwd()+"/Saves",
             defaultFile="",
             wildcard=wildcard,
             style=wx.OPEN | wx.MULTIPLE | wx.CHANGE_DIR

@@ -38,7 +38,6 @@ class Blob:
         print "BLOB"
         for x,y in zip(self.xs, self.ys):
             print x, y
-            pass
         return 'END BLOB'
 
     def add_point(self,pt):
@@ -164,7 +163,6 @@ def parse_dsl(prog,gui_help_msg):
 
 
         f = math_parse(math)                ## Parse and assign math to blob.math()
-        print f
         lin.math = lambda x, y: eval(f)
 
         blobs.append(lin)                   ## Put it on the list for later flattening
