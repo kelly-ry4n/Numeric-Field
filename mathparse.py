@@ -2,9 +2,14 @@ from __future__ import division
 from collections import deque
 
 def math_parse(expression):
+    ''' Set up expression for parsing'''
     return parse(deque(expression.split()))
 
 def parse(tokens):
+    '''Simple recursive parser-compiler for Polish notation math experssions to
+    python syntax math expressions'''
+
+    ## TODO: add other functions.. sin(), cos(), tan(), whatever
     token=tokens.popleft()
     if token=='+':
         return '('+parse(tokens)+'+'+parse(tokens)+')'

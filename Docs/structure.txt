@@ -1,22 +1,44 @@
 Files:
     
 \---Numeric-Field
+    |
     |   .gitignore
     |   DrawGui.py
     |   FieldSolver.py
+    |   mathparse.py
+    |   parser.py
     |   PlotOnFig.py
     |   README.md
     |
     \---Docs
-            gui_docs.txt
-            structure.txt
+        |
+        |   gui_docs.txt
+        |   structure.txt
+        \
+
 
 DrawGui.py:
     Contains a WX gui initialization and methods.
 
     TODO: Add console/logging
 
+FieldSolver.py
 
+    TODO: 3d
+
+    TODO: More than one magnitude of charge? Right now it just makes all charges be the same mag
+
+    TODO: Improve accuracy?
+
+mathparse.py
+    Contains the parser for polish notation math expressions.
+
+    TODO: Add additional functions.. sin, cos, etc.
+
+parser.py
+    Contains the parser for the DSL used for input
+
+    TODO: Add time dependance
 
 PlotOnFig.py
     Contains functions which given a figure will plot data. Currently gets functions to plot from caller.
@@ -27,23 +49,4 @@ PlotOnFig.py
     TODO: Add parameters to control contours, vectors, looks, etc.
 
     TODO: Wrap this in a few different ways for different types of plots
-
-
-FieldSolver.py
-
-    TODO: 3d
-
-    TODO: More than one magnitude of charge? Right now it just makes all charges be the same mag
-
-    TODO: Improve accuracy?
-
-FieldCreator.py:
-    TODO: Impliment this!
-
-    TODO: Create functionality to quickly create various types of field initializations. For example:
-    - Rectangles of change, given density, position, size
-    - Circles of charge, given position, size
-    - 2d curves of chage, given functions
-    - 3d calculations? INSANITY
-
     
