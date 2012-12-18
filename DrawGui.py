@@ -261,6 +261,8 @@ Supported operations are: +, -, *, /, ^, sin, cos, tan, log, log10, exp
             path = open_dlg.GetPaths()[0]
 
         xs,ys,cs = get_data(path)
+        
+        ## Build a command for the Gui and pass it along
         f=zip(xs,ys,cs)
         m=''
         for i in range(len(f)):
@@ -270,6 +272,7 @@ Supported operations are: +, -, *, /, ^, sin, cos, tan, log, log10, exp
             m= m+s[0:-1]+")\n"
 
         self.input_text_ctrl.ChangeValue(m)
+        self.start_fig_update()
             
         open_dlg.Destroy()
 

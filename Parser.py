@@ -109,9 +109,9 @@ def parse_dsl(prog,gui_help_msg):
 
         Adds a point directly to the output lists, with default charge 1'''
 
-        xs_out.append(x)            ## Append to the three lists
-        ys_out.append(y)
-        cs_out.append(charge)       ## Chage default arg with their argument
+        xs_out.append(float(x))            ## Append to the three lists
+        ys_out.append(float(y))
+        cs_out.append(float(charge))       ## Chage default arg with their argument
                                     ## of point in the parser's input string
 
     def rectangle(x0,y0,x1,y1,res,math):
