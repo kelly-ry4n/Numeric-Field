@@ -261,6 +261,15 @@ Supported operations are: +, -, *, /, ^
             path = open_dlg.GetPaths()[0]
 
         xs,ys,cs = get_data(path)
+        f=zip(xs,ys,cs)
+        m=''
+        for i in range(len(f)):
+            s='point('
+            for j in range(3):
+                s= s+f[i][j]+','
+            m= m+s[0:-1]+")\n"
+
+        self.input_text_ctrl.ChangeValue(m)
             
         open_dlg.Destroy()
 
