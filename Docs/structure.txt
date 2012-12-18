@@ -6,16 +6,21 @@ Files:
     |   DrawGui.py
     |   FieldSolver.py
     |   mathparse.py
-    |   parser.py
+    |   Parser.py
     |   PlotOnFig.py
     |   README.md
     |
     \---Docs
-        |
-        |   gui_docs.txt
-        |   structure.txt
-        \
-
+    |    |
+    |    |   gui_docs.txt
+    |    |   structure.txt
+    |    \
+    |
+    \---Saves
+         |
+         |   t1.txt
+         |   test.txt
+         \
 
 DrawGui.py:
     Contains a WX gui initialization and methods.
@@ -26,7 +31,7 @@ FieldSolver.py
 
     TODO: 3d
 
-    TODO: More than one magnitude of charge? Right now it just makes all charges be the same mag
+    TODO: Change how charges are handled for lines and rectangles so that a line/rectangle has the charge specified (as opposed to each point having that charge)
 
     TODO: Improve accuracy?
 
@@ -34,8 +39,9 @@ mathparse.py
     Contains the parser for polish notation math expressions.
 
     TODO: Add additional functions.. sin, cos, etc.
+            -Done
 
-parser.py
+Parser.py
     Contains the parser for the DSL used for input
 
     TODO: Add time dependance
@@ -47,6 +53,7 @@ PlotOnFig.py
     TODO: Impliment 3d plotting
 
     TODO: Add parameters to control contours, vectors, looks, etc.
+            -Has this been done satisfactorally? or should we go for more user control?
 
     TODO: Wrap this in a few different ways for different types of plots
     
