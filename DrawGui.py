@@ -14,6 +14,7 @@ from matplotlib.figure import Figure
 from FieldSolver import force_field
 from PlotOnFig import plot_on_fig
 from Parser import parse_dsl
+from Files import get_data, save_data
 
 import wx
 
@@ -85,16 +86,19 @@ class CanvasPanel(wx.Panel):
 
         ## Load button
 
-        self.draw_charge_button = wx.Button(self,label='Load Charge Field')
-        self.draw_charge_button.SetSize((50,30))
-        self.draw_charge_button.Bind(wx.EVT_BUTTON, self.load_charge_field)
+        self.load_charge_button = wx.Button(self,label='Load')
+        self.save_charge_button = wx.Button(self,label='Save')
+        #self.load_charge_button.SetSize((30,30))
+        self.load_charge_button.Bind(wx.EVT_BUTTON, self.load_charge_field)
+        self.save_charge_button.Bind(wx.EVT_BUTTON, self.save_charge_field)
 
         ## Put dropdown boxes and load button into horizontal sizer
 
         self.dropdown_sizer.Add(self.plot_type_selector)
         self.dropdown_sizer.Add(self.vector_drawing_selector)
         self.dropdown_sizer.Add(self.field_type_selector)
-        self.dropdown_sizer.Add(self.draw_charge_button)
+        self.dropdown_sizer.Add(self.load_charge_button)
+        self.dropdown_sizer.Add(self.save_charge_button)
         self.vertical_sizer.Add(self.dropdown_sizer)
 
         ## Put horizontal sizer into vertical sizer
@@ -250,23 +254,34 @@ Supported operations are: +, -, *, /, ^
             defaultDir=os.getcwd()+"/Saves",
             defaultFile="",
             wildcard=wildcard,
-            style=wx.OPEN | wx.MULTIPLE | wx.CHANGE_DIR
+            style=wx.OPEN | wx.CHANGE_DIR
             )
 
         if open_dlg.ShowModal() == wx.ID_OK:
             path = open_dlg.GetPaths()[0]
-            values = array.array('l')
 
-            try:
-                with open(path) as f:
-                    values.fromfile(f,10000)
-            except EOFError:
-                pass
-            finally:
-                print values
+        xs,ys,cs = get_data(path)
             
-
         open_dlg.Destroy()
+
+    def save_charge_field(self,e):
+        ''' Saves what's currently in the input box'''
+        wildcard = "Files (*.*)|*.*"
+        save_dlg = wx.FileDialog(
+            self, message = 'Choose file',
+            defaultDir=os.getcwd()+"/Saves",
+            defaultFile="",
+            wildcard=wildcard,
+            style=wx.SAVE | wx.CHANGE_DIR
+            )
+
+        if save_dlg.ShowModal() == wx.ID_OK:
+            path = save_dlg.GetPaths()[0]            
+        save_dlg.Destroy()
+
+        xs, ys, cs = parse_dsl(self.input_text_ctrl.GetValue(),
+                                self.display_help_msg_callback)
+        save_data(path,xs,ys,cs)
         
 
 
