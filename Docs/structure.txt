@@ -35,6 +35,10 @@ FieldSolver.py
 
     TODO: Improve accuracy?
 
+Files.py
+
+    TODO: fix small bug when saving/loading: Saves and adds a blank line after data which crashes loader. Can probably be fixed by either not written that blank line or not reading it.
+
 mathparse.py
     Contains the parser for polish notation math expressions.
 

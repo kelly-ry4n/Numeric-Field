@@ -1,6 +1,6 @@
 from __future__ import division
 import string
-from numpy import linspace, sin, cos, tan, pi, exp, log, log10
+from numpy import linspace, sin, cos, tan, pi, exp, log, log10, radians
 from mathparse import math_parse
 ## <expr> ->    <shape> | <declaration>
 ##
@@ -167,6 +167,25 @@ def parse_dsl(prog,gui_help_msg):
 
         blobs.append(lin)                   ## Put it on the list for later flattening
 
+    def circle(x0,y0,radius,start_arc,end_arc,numpoints,math):
+        """Create a circle of charge by using polar notation. Circle will have a start and stop end_arc
+        given in degrees (for covinience)."""
+
+        circle = Blob()                  ##Spiffy new blob
+
+        theta = radians(linspace(start_arc,end_arc,numpoints)) #figure out our angles
+
+        xs = radius*cos(theta)+x0                              #Build up our xs and ys
+        ys = radius*sin(theta)+y0
+
+        for x,y in zip(xs,ys):
+            circle.add_point(Point(x,y))
+
+        f = math_parse(str(math))                             #Parse some math for the charges
+        circle.math = lambda x, y: eval(f)
+
+        blobs.append(circle)                     #Stick into the main blob
+
     def return_var(var):
         '''Looks up a variable or atom in the parse namespace'''
 
@@ -214,6 +233,7 @@ def parse_dsl(prog,gui_help_msg):
                 'rectangle' : rectangle,
                 'line'      : line,
                 'point'     : point,
+                'circle'    : circle,
              }
 
 ## run

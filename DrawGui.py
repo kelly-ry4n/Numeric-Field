@@ -186,6 +186,8 @@ point(x,y,c)                       -   Creates a point at x,y, with charge
 line(x1,y2, x2,y2, numpoints, c)   -   Creates a line of points, each with charge c from (x1,y1) to (x2,y2)
 rectangle(x1,y1,x2,y2,res, c)      -   Create a rectangle bounded by two corner points (x1,y1) and (x2,y2)\
  where the charge density is related to res, and c gives the charge of the individual points
+circle(x0,y0,radius,start_arc,end_arc,numpoints,c)  -Creates a part or a whole circle of charges, (x0,y0) is\
+the center of the circle, the arcs are given in degrees.
 
 Charges can be defined using Polish math notation ( + 1 1 is equivalent to 1+1)
 Supported operations are: +, -, *, /, ^, sin, cos, tan, log, log10, exp
