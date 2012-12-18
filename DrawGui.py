@@ -25,7 +25,7 @@ class CanvasPanel(wx.Panel):
         self.parent.SetSize((640,600))
         wx.Panel.__init__(self, parent)
         default_input_text = \
-'''rectangle(1,1,2,2,4, * + x 1 + x 2)\nline(-2,-2,0,0,5,* x y)'''
+'''point(4,2,5)\nline(-2,-2,0,0,5,* x + y x)'''
 
         plot_type_choices = [
                                 'Contour Plot',
