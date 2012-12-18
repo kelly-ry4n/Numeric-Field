@@ -177,12 +177,15 @@ class CanvasPanel(wx.Panel):
         ''' Displays the help message in the output box'''
         helpstr = \
 '''Statements:
-var(<name>,number)              -   Assigns number to <name>
-point(x,y)                      -   Creates a point of charge at x,y
-line(x1,y2, x2,y2, numpoints)   -   Creates a line of charge from one point to another\
-with numpoint points
-rectangle(x1,y1,x2,y2,res)      -   Create a rectangle bounded by two corner points\
- where the charge density is related to res'''
+var(<name>,number)                 -   Assigns number to <name>
+point(x,y,c)                       -   Creates a point at x,y, with charge
+line(x1,y2, x2,y2, numpoints, c)   -   Creates a line of points, each with charge c from (x1,y1) to (x2,y2)
+rectangle(x1,y1,x2,y2,res, c)      -   Create a rectangle bounded by two corner points (x1,y1) and (x2,y2)\
+ where the charge density is related to res, and c gives the charge of the individual points
+
+Charges can be defined using Polish math notation ( + 1 1 is equivalent to 1+1)
+Supported operations are: +, -, *, /, ^
+ '''
         self.set_console_msg(helpstr)
 
     def set_console_msg(self,msg):
