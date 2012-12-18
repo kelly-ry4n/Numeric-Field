@@ -23,8 +23,8 @@ def parse(tokens):
         return '('+parse(tokens)+'**'+parse(tokens)+')'
     else:
             # must be a number or variable
-
         return token
+
 
 
 

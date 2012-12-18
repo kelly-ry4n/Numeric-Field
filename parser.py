@@ -1,6 +1,6 @@
 from __future__ import division
 import string
-from numpy import linspace
+from numpy import linspace, sin, cos, tan
 from mathparse import math_parse
 ## <expr> ->    <shape> | <declaration>
 ##
@@ -164,6 +164,7 @@ def parse_dsl(prog,gui_help_msg):
 
 
         f = math_parse(math)                ## Parse and assign math to blob.math()
+        print f
         lin.math = lambda x, y: eval(f)
 
         blobs.append(lin)                   ## Put it on the list for later flattening
