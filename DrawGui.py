@@ -248,5 +248,5 @@ if __name__ == "__main__":
 
     except Exception as Exc:
         print '\n\n\n'
-        traceback.print_exc(file=sys.stdout)
+        #traceback.print_exc(file=sys.stdout)
         raw_input('\n\n\nPress any key to continue')

@@ -33,6 +33,7 @@ class Blob:
         print "BLOB"
         for x,y in zip(self.xs, self.ys):
             print x, y
+            pass
         return 'END BLOB'
 
     def add_point(self,pt):
@@ -128,7 +129,6 @@ def parse_dsl(prog,gui_help_msg):
              }
 
 
-
     def parse(prog):
 
         for op,args in tokenize(prog):
@@ -149,10 +149,6 @@ def parse_dsl(prog,gui_help_msg):
 
     parse(prog)
     blobs_to_lsts(blobs)
-    print xs_out
-    print ys_out
-    print cs_out
-    return xs_out, ys_out, cs_out
     
 
 

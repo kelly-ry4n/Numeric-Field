@@ -25,4 +25,4 @@ def parse(tokens):
 
 if __name__=='__main__':
         expression="/ - + 2 2 3 4"
-        print math_parse(expression)
+        #print math_parse(expression)
