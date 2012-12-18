@@ -197,7 +197,7 @@ rectangle(x1,y1,x2,y2,res)      -   Create a rectangle bounded by two corner poi
         else:
 
             force_field(self.figure, plot_type, vector_type,
-                        domain_x, range_y,xs,ys,field_type, res = 100)
+                        domain_x, range_y,xs,ys,cs,field_type, res = 100)
 
             self.canvas.draw()
             self.status_text.SetLabel('Render Finished')
