@@ -25,10 +25,7 @@ class CanvasPanel(wx.Panel):
         self.parent.SetSize((640,600))
         wx.Panel.__init__(self, parent)
         default_input_text = \
-'''var(x,0)
-point(3,4)
-line(-4,4,4,-2,5)
-rectangle(-4,-4,x,x,16)'''
+'''rectangle(1,1,2,2,4, * + x 1 + x 2)\nline(-2,-2,0,0,5,* x y)'''
 
         plot_type_choices = [
                                 'Contour Plot',
@@ -188,7 +185,7 @@ rectangle(x1,y1,x2,y2,res)      -   Create a rectangle bounded by two corner poi
         vector_type = self.vector_drawing_selector.GetValue()
         field_type = self.field_type_selector.GetValue()
 
-        xs, ys = parse_dsl(self.input_text_ctrl.GetValue(),self.display_help_msg_callback)
+        xs, ys, cs = parse_dsl(self.input_text_ctrl.GetValue(),self.display_help_msg_callback)
 
         if xs == []:
             self.set_console_msg('Input cannot be empty!\
