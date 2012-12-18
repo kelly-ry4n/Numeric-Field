@@ -136,7 +136,7 @@ def parse_dsl(prog,gui_help_msg):
 
                 rect.add_point(Point(x,y))  ## Add each point to the blob
 
-        f = math_parse(math)                ## Parse the Polish notation into python
+        f = math_parse(str(math))           ## Parse the Polish notation into python
                                             ## syntax.
 
         rect.math = lambda x, y: eval(f)    ## Evaluate the python syntax string
@@ -162,7 +162,7 @@ def parse_dsl(prog,gui_help_msg):
             lin.add_point(Point(x,y))
 
 
-        f = math_parse(math)                ## Parse and assign math to blob.math()
+        f = math_parse(str(math))                ## Parse and assign math to blob.math()
         lin.math = lambda x, y: eval(f)
 
         blobs.append(lin)                   ## Put it on the list for later flattening

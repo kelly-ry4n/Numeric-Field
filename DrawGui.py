@@ -188,7 +188,7 @@ rectangle(x1,y1,x2,y2,res, c)      -   Create a rectangle bounded by two corner 
  where the charge density is related to res, and c gives the charge of the individual points
 
 Charges can be defined using Polish math notation ( + 1 1 is equivalent to 1+1)
-Supported operations are: +, -, *, /, ^
+Supported operations are: +, -, *, /, ^, sin, cos, tan, log, log10, exp
  '''
         self.set_console_msg(helpstr)
 
