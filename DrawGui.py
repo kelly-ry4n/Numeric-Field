@@ -24,8 +24,12 @@ class CanvasPanel(wx.Panel):
         self.parent = parent
         self.parent.SetSize((640,600))
         wx.Panel.__init__(self, parent)
+
+## String for the default text for the text input box
         default_input_text = \
 '''point(4,2,5)\nline(-2,-2,0,0,5,* x + y x)'''
+
+## Types of plots for plot choice dropdown
 
         plot_type_choices = [
                                 'Contour Plot',
@@ -33,6 +37,8 @@ class CanvasPanel(wx.Panel):
                                 'Vector with Contour',
                                 '3d -- NOT IMPLIMENTED',
                             ]
+
+## Method of calculating W for second dropdown
 
         vector_drawing_choices = [
                                     'Magnitude',
@@ -44,6 +50,10 @@ class CanvasPanel(wx.Panel):
                                     'Dot'
                                     ]
 
+
+## Options for field type dropdown
+## TODO: Figure out quantum and einstien
+
         field_type_choices = [
                                 'Gravitational',
                                 'Electric'
@@ -53,6 +63,8 @@ class CanvasPanel(wx.Panel):
 
         self.vertical_sizer = wx.BoxSizer(wx.VERTICAL) # Our main sizer
 
+        ## Set up the three dropdown boxes for selecting 
+        ## what to plot and how it should look
 
         self.plot_type_selector = wx.ComboBox(  parent=self,
                                                 choices=plot_type_choices,
@@ -71,16 +83,25 @@ class CanvasPanel(wx.Panel):
 
         self.dropdown_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
+        ## Load button
+
         self.draw_charge_button = wx.Button(self,label='Load Charge Field')
         self.draw_charge_button.SetSize((50,30))
         self.draw_charge_button.Bind(wx.EVT_BUTTON, self.load_charge_field)
+
+        ## Put dropdown boxes and load button into horizontal sizer
 
         self.dropdown_sizer.Add(self.plot_type_selector)
         self.dropdown_sizer.Add(self.vector_drawing_selector)
         self.dropdown_sizer.Add(self.field_type_selector)
         self.dropdown_sizer.Add(self.draw_charge_button)
         self.vertical_sizer.Add(self.dropdown_sizer)
+
+        ## Put horizontal sizer into vertical sizer
+
         self.vertical_sizer.Add((0,3))
+
+        ## Setup a matplotlib figure for mutation by plot_on_fig
 
         self.figure = Figure()
         self.axes = self.figure.add_subplot(111)
@@ -88,6 +109,8 @@ class CanvasPanel(wx.Panel):
 
         self.vertical_sizer.Add(self.canvas, 1, wx.LEFT | wx.TOP | wx.GROW)
         self.vertical_sizer.Add((0,10))
+
+        ## Set up text and domain inputs, add them to sizers
 
         self.x_horizontal_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
@@ -136,6 +159,8 @@ class CanvasPanel(wx.Panel):
         self.bottom_horizontal_sizer.Add(self.status_text)
         self.vertical_sizer.Add(self.bottom_horizontal_sizer)
 
+        ## Input and output consoles
+
         self.output_text_ctrl= wx.TextCtrl(self,style = wx.TE_MULTILINE|wx.TE_READONLY,
                                             size = (620,75))
         self.output_text_ctrl.ChangeValue('Console..')
@@ -149,6 +174,7 @@ class CanvasPanel(wx.Panel):
         self.Fit()
 
     def display_help_msg_callback(self):
+        ''' Displays the help message in the output box'''
         helpstr = \
 '''Statements:
 var(<name>,number)              -   Assigns number to <name>
@@ -160,6 +186,7 @@ rectangle(x1,y1,x2,y2,res)      -   Create a rectangle bounded by two corner poi
         self.set_console_msg(helpstr)
 
     def set_console_msg(self,msg):
+        '''Sets the output box text'''
         self.output_text_ctrl.ChangeValue(msg)
 
     def update_fig(self):
@@ -176,6 +203,8 @@ rectangle(x1,y1,x2,y2,res)      -   Create a rectangle bounded by two corner poi
         t.run()
 
     def start_fig_update(self):
+        '''Mutates the matplotlib figure to show data. Takes data from 
+        various input fields.'''
 
         self.status_text.SetLabel('Computing Field...')
 
@@ -203,6 +232,7 @@ rectangle(x1,y1,x2,y2,res)      -   Create a rectangle bounded by two corner poi
             self.status_text.SetLabel('Render Finished')
 
     def threaded_progress_bar_update(self):
+        ''' Currently not in use'''
         while 1:
             percent = self.progress_q.get()
             self.progress_gauge.SetValue(percent)
@@ -210,7 +240,8 @@ rectangle(x1,y1,x2,y2,res)      -   Create a rectangle bounded by two corner poi
                 break
 
     def load_charge_field(self,e):
-        wildcard = "BMP map (*.bmp)|*.bmp"
+        ''' Load button functionality.'''
+        wildcard = "Files (*.*)|*.*"
         open_dlg = wx.FileDialog(
             self, message = 'Choose file',
             defaultDir=os.getcwd(),
@@ -247,6 +278,7 @@ if __name__ == "__main__":
         app.MainLoop()
 
     except Exception as Exc:
+        ## Don't close till we see the error
         print '\n\n\n'
         traceback.print_exc(file=sys.stdout)
         raw_input('\n\n\nPress any key to continue')
