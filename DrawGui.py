@@ -27,7 +27,7 @@ class CanvasPanel(wx.Panel):
 
 ## String for the default text for the text input box
         default_input_text = \
-'''point(4,2,5)\nline(-2,-2,0,0,5,* x + y x)'''
+'''point(4,2,5)'''
 
 ## Types of plots for plot choice dropdown
 
