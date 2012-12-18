@@ -21,6 +21,8 @@ def parse(tokens):
         return '('+parse(tokens)+'/'+parse(tokens)+')'
     elif token=='^':
         return '('+parse(tokens)+'**'+parse(tokens)+')'
+    elif token=='sin':
+        return '(sin(' + parse(tokens) + '))'
     else:
             # must be a number or variable
         return token
@@ -29,5 +31,5 @@ def parse(tokens):
 
 
 if __name__=='__main__':
-        expression="/ - + 2 2 3 4"
-        #print math_parse(expression)
+        expression="sin x"
+        print math_parse(expression)

@@ -1,6 +1,6 @@
 from __future__ import division
 import string
-from numpy import linspace, sin, cos, tan
+from numpy import linspace, sin, cos, tan, pi, exp
 from mathparse import math_parse
 ## <expr> ->    <shape> | <declaration>
 ##
@@ -156,7 +156,7 @@ def parse_dsl(prog,gui_help_msg):
         horizontal = linspace(x0,x1,res)    ## Make a line along x
 
         m = (y1-y0)/(x1-x0)                 ## Map horizontal onto the line
-        b = y0- m*x1-x0                     ## using y-mx + b
+        b = y0- m*(x1-x0)                   ## using y-mx + b
 
         for x,y in zip(horizontal, (m*horizontal) + b):
             lin.add_point(Point(x,y))
