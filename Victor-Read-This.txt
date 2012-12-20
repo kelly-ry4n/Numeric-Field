@@ -1,0 +1,129 @@
+
+The nice thing about consistantly formatted ## TODO is that
+
+ctrl + shift + F
+Find: # TODO
+Where: <open files>
+
+
+
+
+Searching 5 files for "## TODO:" (case sensitive)
+
+C:\Users\kelly-laptop-win\Documents\GitHub\Numeric-Field\DrawGui.py:
+   55  
+   56  ## Options for field type dropdown
+   57: ## TODO: Figure out quantum and einstien
+   58  
+   59          field_type_choices = [
+
+C:\Users\kelly-laptop-win\Documents\GitHub\Numeric-Field\Parser.py:
+   91                                      ## x and x
+   92  
+   93:                                     ## TODO: add time dependance (t?)
+   94  
+   95              for x,y,c in zip(blob.xs,blob.ys,blob.charges):   ## Construct output lists
+   ..
+   98                  cs_out.append(c)
+   99  
+  100:             ## TODO: convert to numpy arrays... shouldn't cause too many problems..
+  101              ##       .. I think
+  102  
+  ...
+  135  
+  136          for x in xs:                        ## Basically set up a meshgrid of x and y
+  137:             for y in ys:                    ## TODO: Look into replacing with Meshgrid.
+  138  
+  139                  rect.add_point(Point(x,y))  ## Add each point to the blob
+
+C:\Users\kelly-laptop-win\Documents\GitHub\Numeric-Field\mathparse.py:
+   15      python syntax math expressions'''
+   16  
+   17:     ## TODO: add other functions.. sin(), cos(), tan(), whatever
+   18      token=tokens.popleft()
+   19      if token=='+':
+
+5 matches across 3 files
+
+
+Searching 5 files for "# TODO:" (case sensitive)
+
+C:\Users\kelly-laptop-win\Documents\GitHub\Numeric-Field\DrawGui.py:
+   55  
+   56  ## Options for field type dropdown
+   57: ## TODO: Figure out quantum and einstien
+   58  
+   59          field_type_choices = [
+
+C:\Users\kelly-laptop-win\Documents\GitHub\Numeric-Field\Parser.py:
+   91                                      ## x and x
+   92  
+   93:                                     ## TODO: add time dependance (t?)
+   94  
+   95              for x,y,c in zip(blob.xs,blob.ys,blob.charges):   ## Construct output lists
+   ..
+   98                  cs_out.append(c)
+   99  
+  100:             ## TODO: convert to numpy arrays... shouldn't cause too many problems..
+  101              ##       .. I think
+  102  
+  ...
+  135  
+  136          for x in xs:                        ## Basically set up a meshgrid of x and y
+  137:             for y in ys:                    ## TODO: Look into replacing with Meshgrid.
+  138  
+  139                  rect.add_point(Point(x,y))  ## Add each point to the blob
+
+C:\Users\kelly-laptop-win\Documents\GitHub\Numeric-Field\mathparse.py:
+   15      python syntax math expressions'''
+   16  
+   17:     ## TODO: add other functions.. sin(), cos(), tan(), whatever
+   18      token=tokens.popleft()
+   19      if token=='+':
+
+5 matches across 3 files
+
+
+Searching 5 files for "(# TODO|#TODO" (regex, case sensitive)
+
+Unmatched marking parenthesis ( or \(.  The error occured while parsing the regular expression fragment: 'TODO|#TODO>>>HERE>>>'. in regular expression (# TODO|#TODO
+
+0 matches across 0 files
+
+
+Searching 5 files for "(# TODO|#TODO)" (regex, case sensitive)
+
+C:\Users\kelly-laptop-win\Documents\GitHub\Numeric-Field\DrawGui.py:
+   55  
+   56  ## Options for field type dropdown
+   57: ## TODO: Figure out quantum and einstien
+   58  
+   59          field_type_choices = [
+
+C:\Users\kelly-laptop-win\Documents\GitHub\Numeric-Field\Parser.py:
+   91                                      ## x and x
+   92  
+   93:                                     ## TODO: add time dependance (t?)
+   94  
+   95              for x,y,c in zip(blob.xs,blob.ys,blob.charges):   ## Construct output lists
+   ..
+   98                  cs_out.append(c)
+   99  
+  100:             ## TODO: convert to numpy arrays... shouldn't cause too many problems..
+  101              ##       .. I think
+  102  
+  ...
+  135  
+  136          for x in xs:                        ## Basically set up a meshgrid of x and y
+  137:             for y in ys:                    ## TODO: Look into replacing with Meshgrid.
+  138  
+  139                  rect.add_point(Point(x,y))  ## Add each point to the blob
+
+C:\Users\kelly-laptop-win\Documents\GitHub\Numeric-Field\mathparse.py:
+   15      python syntax math expressions'''
+   16  
+   17:     ## TODO: add other functions.. sin(), cos(), tan(), whatever
+   18      token=tokens.popleft()
+   19      if token=='+':
+
+5 matches across 3 files
