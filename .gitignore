@@ -37,3 +37,6 @@ nosetests.xml
 
 # kelly's convience stuff
 cons.bat
+
+# save files
+*.figsave
