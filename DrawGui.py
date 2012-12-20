@@ -28,7 +28,7 @@ class CanvasPanel(wx.Panel):
 
 ## String for the default text for the text input box
         default_input_text = \
-'''curve(0,10,* 3 * cos s - 1 cos s,* 3 * sin s - 1 cos s ,200,  * -1 x)
+'''curve(0,10,* 3 * cos s - 1 cos s,* 3 * sin s - 1 cos s ,20,  * -1 x)
 point(3,0,5)'''
 
 ## Types of plots for plot choice dropdown
@@ -251,7 +251,7 @@ Supported operations are: +, -, *, /, ^, sin, cos, tan, log, log10, exp
 
     def load_charge_field(self,e):
         ''' Load button functionality.'''
-        wildcard = "Files (*.*)|*.*"
+        wildcard = "Files (*.figsave)|*.figsave"
         open_dlg = wx.FileDialog(
             self, message = 'Choose file',
             defaultDir=os.getcwd()+"/Saves",
@@ -281,7 +281,7 @@ Supported operations are: +, -, *, /, ^, sin, cos, tan, log, log10, exp
 
     def save_charge_field(self,e):
         ''' Saves what's currently in the input box'''
-        wildcard = "Files (*.*)|*.*"
+        wildcard = "Files (*.figsave)|*.figsave"
         save_dlg = wx.FileDialog(
             self, message = 'Choose file',
             defaultDir=os.getcwd()+"/Saves",
