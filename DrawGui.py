@@ -100,6 +100,7 @@ point(3,0,5)'''
         self.dropdown_sizer.Add(self.field_type_selector)
         self.dropdown_sizer.Add(self.load_charge_button)
         self.dropdown_sizer.Add(self.save_charge_button)
+
         self.vertical_sizer.Add(self.dropdown_sizer)
 
         ## Put horizontal sizer into vertical sizer
@@ -150,14 +151,17 @@ point(3,0,5)'''
         self.vertical_sizer.Add(self.y_horizontal_sizer)
         self.vertical_sizer.Add((0,10))
 
-        self.update_fig_button = wx.Button(self, label='Update Figure')
+        self.update_fig_button  = wx.Button(self, label='Update Figure')
+        self.save_fig_button    = wx.Button(self, label='Save Figure')
         self.update_fig_button.Bind(wx.EVT_BUTTON, self.update_fig_from_button)
+        self.save_fig_button.Bind(wx.EVT_BUTTON, self.save_figure)
 
         self.progress_gauge = wx.Gauge(self,wx.GA_HORIZONTAL|wx.EXPAND|wx.GROW,range=100)
         self.status_text = wx.StaticText(self,wx.RIGHT,label="Render Complete")
 
         self.bottom_horizontal_sizer = wx.BoxSizer(wx.HORIZONTAL)
         self.bottom_horizontal_sizer.Add(self.update_fig_button)
+        self.bottom_horizontal_sizer.Add(self.save_fig_button)
         self.bottom_horizontal_sizer.Add((10,0))
         self.bottom_horizontal_sizer.Add(self.progress_gauge)
         self.bottom_horizontal_sizer.Add((10,0))
@@ -297,6 +301,20 @@ Supported operations are: +, -, *, /, ^, sin, cos, tan, log, log10, exp
         xs, ys, cs = parse_dsl(self.input_text_ctrl.GetValue(),
                                 self.display_help_msg_callback)
         save_data(path,xs,ys,cs)
+
+    def save_figure(self,e):
+        wildcard = "PNG Image (*.png)|*.png"
+        save_dlg = wx.FileDialog(
+            self, message = 'Choose file',
+            defaultDir=os.getcwd()+"/Saves",
+            defaultFile="",
+            wildcard=wildcard,
+            style=wx.SAVE | wx.CHANGE_DIR
+            )
+        if save_dlg.ShowModal() == wx.ID_OK:
+            filename = save_dlg.GetPaths()[0]            
+        save_dlg.Destroy()
+        self.figure.savefig(filename)
         
 
 
