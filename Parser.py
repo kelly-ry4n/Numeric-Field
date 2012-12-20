@@ -31,7 +31,9 @@ class Blob:
         self.charges = []
 
         ## self.math is a function object which should be created and bound by parsing
-        self.math=lambda x,y : 1   
+        self.math=lambda x,y : 1
+        self.x_parameters = lambda t: 1
+        self.y_parameters = lambda t: 1
 
     def __repr__(self):
         '''Print points in self'''
@@ -186,6 +188,33 @@ def parse_dsl(prog,gui_help_msg):
 
         blobs.append(circle)                     #Stick into the main blob
 
+    def parametric_curve(s1, s2, f1, f2, res, math):
+        ''' Creates a blob which is a parametric curve of the form f(x,y) = (g(t),h(t))
+
+        s1, s2 donate the domain of the parameter, fx is the x component, fy is the y compenent
+        '''
+        curve = Blob()                  #New blob
+
+        domain = linspace(s1,s2,res)    # Domain of the parameterizing variable
+
+
+        f1_func = lambda s: eval(math_parse(f1))  # We're gonna have a two part math here, in
+        f2_func = lambda s: eval(math_parse(f2))  # addition to the usual to calculate x and y
+
+        calc_charges = lambda x, y: eval (math_parse(str(math)))
+
+
+        xs = f1_func(domain)
+        ys = f2_func(domain)
+
+        for x,y in zip(xs, ys):
+            curve.add_point(Point(x,y))
+
+        curve.math = calc_charges
+
+        blobs.append(curve)
+
+
     def return_var(var):
         '''Looks up a variable or atom in the parse namespace'''
 
@@ -234,11 +263,12 @@ def parse_dsl(prog,gui_help_msg):
                 'line'      : line,
                 'point'     : point,
                 'circle'    : circle,
+                'curve'     : parametric_curve
              }
 
 ## run
 
     parse(prog)
     blobs_to_lsts(blobs)
-    
+
     return xs_out, ys_out, cs_out

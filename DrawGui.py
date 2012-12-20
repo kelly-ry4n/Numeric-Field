@@ -28,7 +28,8 @@ class CanvasPanel(wx.Panel):
 
 ## String for the default text for the text input box
         default_input_text = \
-'''point(4,2,5)'''
+'''curve(0,10,* 3 * cos s - 1 cos s,* 3 * sin s - 1 cos s ,200,  * -1 x)
+point(3,0,5)'''
 
 ## Types of plots for plot choice dropdown
 
