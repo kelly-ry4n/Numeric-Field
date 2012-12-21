@@ -1,3 +1,4 @@
+from __future__ import division
 from Blob import Blob, Point
 from numpy import linspace
 from mathparse import math_parse
@@ -47,6 +48,8 @@ def create_shape(blobs,outs,name,*args):
 
         rect = Blob()                       ## Initialize a new Blob...
 
+        x0, y0, x1, y1 = float(x0), float(y0), float(x1), float(y1)
+
         xs = linspace(x0,x1, res/(y1-y0))   ## Set up a vertical and horizontal line
         ys = linspace(y0,y1, res/(x1-x0))   ## of charges
 
@@ -72,6 +75,8 @@ def create_shape(blobs,outs,name,*args):
 
         lin = Blob()                        ## Iniitialize a new blob
 
+        x0, y0, x1, y1 = float(x0), float(y0), float(x1), float(y1)
+
         horizontal = linspace(x0,x1,res)    ## Make a line along x
 
         m = (y1-y0)/(x1-x0)                 ## Map horizontal onto the line
@@ -91,6 +96,8 @@ def create_shape(blobs,outs,name,*args):
         given in degrees (for covinience)."""
 
         circle = Blob()                  ##Spiffy new blob
+
+        x0, y0, start_arc, end_arc = float(x0), float(y0), float(start_arc), float(end_arc)
 
         theta = radians(linspace(start_arc,end_arc,numpoints)) #figure out our angles
 
@@ -112,11 +119,14 @@ def create_shape(blobs,outs,name,*args):
         '''
         curve = Blob()                  #New blob
 
+        s1,s2 = float(s1), float(s2)
+
         domain = linspace(s1,s2,res)    # Domain of the parameterizing variable
 
 
         f1_func = lambda s: eval(math_parse(f1))  # We're gonna have a two part math here, in
         f2_func = lambda s: eval(math_parse(f2))  # addition to the usual to calculate x and y
+
 
         calc_charges = lambda x, y: eval (math_parse(str(math)))
 
