@@ -19,10 +19,15 @@ class CanvasPanel(wx.Panel):
         self.parent = parent
         self.parent.SetSize((640,600))
         wx.Panel.__init__(self, parent)
+
+        ## These three functions construct the UI, one for each gui methods, building the ui
+        ## and binding events to wigits
         self.init_methods()
         self.init_ui()
+        self.bind_events()
 
     def init_methods(self):
+        '''Bind methods to class. Should be called by __init__'''
 
 
         ############################## WARNING -- META ###################################
@@ -42,6 +47,7 @@ class CanvasPanel(wx.Panel):
                 exec 'self.%s = MethodType(method, self)' % (name) in locals()
 
     def init_ui(self):
+        '''Construct the 'look' of the UI, including default texts. Should be called by __init__'''
         from GuiConstants import GUI_CONSTANTS
 
         self.helpstr            = GUI_CONSTANTS['help_string']
@@ -78,8 +84,6 @@ class CanvasPanel(wx.Panel):
         self.load_charge_button = wx.Button(self,label='Load')
         self.save_charge_button = wx.Button(self,label='Save')
         #self.load_charge_button.SetSize((30,30))
-        self.load_charge_button.Bind(wx.EVT_BUTTON, self.load_charge_field)
-        self.save_charge_button.Bind(wx.EVT_BUTTON, self.save_charge_field)
 
         ## Put dropdown boxes and load button into horizontal sizer
 
@@ -141,8 +145,6 @@ class CanvasPanel(wx.Panel):
 
         self.update_fig_button  = wx.Button(self, label='Update Figure')
         self.save_fig_button    = wx.Button(self, label='Save Figure')
-        self.update_fig_button.Bind(wx.EVT_BUTTON, self.update_fig_from_button)
-        self.save_fig_button.Bind(wx.EVT_BUTTON, self.save_figure)
 
         self.progress_gauge = wx.Gauge(self,wx.GA_HORIZONTAL|wx.EXPAND|wx.GROW,range=100)
         self.status_text = wx.StaticText(self,wx.RIGHT,label="Render Complete")
@@ -170,7 +172,13 @@ class CanvasPanel(wx.Panel):
         self.SetSizer(self.vertical_sizer)
         self.Fit()
 
-        
+    def bind_events(self):
+        '''Bind events to objects in the UI. Buttons, mostly. Should be called by __init__'''
+        self.load_charge_button.Bind(wx.EVT_BUTTON, self.load_charge_field)
+        self.save_charge_button.Bind(wx.EVT_BUTTON, self.save_charge_field)
+        self.update_fig_button.Bind(wx.EVT_BUTTON, self.update_fig_from_button)
+        self.save_fig_button.Bind(wx.EVT_BUTTON, self.save_figure)
+
 
 
 if __name__ == "__main__":
