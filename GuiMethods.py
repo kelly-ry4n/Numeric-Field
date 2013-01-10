@@ -6,7 +6,7 @@ from FieldSolver import force_field
 from PlotOnFig import plot_on_fig
 from Parser import parse_dsl
 from threading import Thread
-
+# This is a comment
 def display_help_msg_callback(self):
     ''' Displays the help message in the output box'''
     self.set_console_msg(self.helpstr)
