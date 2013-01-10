@@ -1,5 +1,7 @@
 from Files import get_data, save_data
 
+import wx, os
+
 from FieldSolver import force_field
 from PlotOnFig import plot_on_fig
 from Parser import parse_dsl
