@@ -65,6 +65,7 @@ def force_field(fig, plot_type, vector_type, xd, yr, xs, ys, cs,
         F = (F_x,F_y)
         Fq = (F_xq,F_yq) 
 
+        fig, X, Y, Xq, Yq, F, Fq, res, direc =\
         plot_on_fig(fig, X, Y, Xq, Yq, F, Fq, res, direc=vector_type)
 
     elif plot_type=='Contour Plot':
@@ -86,6 +87,7 @@ def force_field(fig, plot_type, vector_type, xd, yr, xs, ys, cs,
 
         F = (F_x,F_y)
 
+        fig, X, Y, Xq, Yq, F, Fq, res, direc=\
         plot_on_fig(fig, X, Y, None, None, F, None, res, direc=vector_type)
 
     elif plot_type=='Vector Field':
@@ -107,4 +109,6 @@ def force_field(fig, plot_type, vector_type, xd, yr, xs, ys, cs,
 
         Fq = (F_xq,F_yq)
 
+        fig, X, Y, Xq, Yq, F, Fq, res, direc=\
         plot_on_fig(fig, None, None, Xq, Yq, None, Fq, res, direc=vector_type)
+    return fig, X, Y, Xq, Yq, F, Fq, res, direc

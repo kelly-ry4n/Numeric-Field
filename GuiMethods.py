@@ -6,6 +6,7 @@ from FieldSolver import force_field
 from PlotOnFig import plot_on_fig
 from Parser import parse_dsl
 from threading import Thread
+from GuiConstants import GUI_CONSTANTS
 # This is a comment
 def display_help_msg_callback(self):
     ''' Displays the help message in the output box'''
@@ -41,7 +42,7 @@ def start_fig_update(self):
     field_type = self.field_type_selector.GetValue()
 
     xs, ys, cs = parse_dsl(self.input_text_ctrl.GetValue(),self.display_help_msg_callback)
-
+    print GUI_CONSTANTS['Field_Cache'][0:9]
     if xs == []:
         self.set_console_msg('Input cannot be empty!\
                              Update with "help" for commands')
@@ -49,12 +50,29 @@ def start_fig_update(self):
     elif xs == None:
         pass
 
+    elif GUI_CONSTANTS['Cache']==[domain_x,range_y,plot_type, field_type, self.input_text_ctrl.GetValue(),vector_type]:
+        print 'nope'
+        return
+
+    elif GUI_CONSTANTS['Cache'][0:5]==[domain_x,range_y,plot_type, field_type, self.input_text_ctrl.GetValue()] and GUI_CONSTANTS['Cache'][5]!= vector_type:
+        ugh = GUI_CONSTANTS['Field_Cache'][0:9]
+        fig, X, Y, Xq, Yq, F, Fq, res, direc=\
+        plot_on_fig(ugh[0],ugh[1],ugh[2],ugh[3],ugh[4],ugh[5],ugh[6],ugh[7],direc=vector_type)
+        
+        GUI_CONSTANTS['Cache'] = [domain_x,range_y,plot_type, field_type, self.input_text_ctrl.GetValue(), vector_type]
+        GUI_CONSTANTS['Field_Cache'] = [fig, X, Y, Xq, Yq, F, Fq, res, direc]
+        print 'yay'
+        return
+
     else:
 
+        fig, X, Y, Xq, Yq, F, Fq, res, direc =\
         force_field(self.figure, plot_type, vector_type,
                     domain_x, range_y,xs,ys,cs,field_type, res = 100)
 
         self.canvas.draw()
+        GUI_CONSTANTS['Cache'] = [domain_x,range_y,plot_type, field_type, self.input_text_ctrl.GetValue(), vector_type]
+        GUI_CONSTANTS['Field_Cache'] = [fig, X, Y, Xq, Yq, F, Fq, res, direc]
         self.status_text.SetLabel('Render Finished')
 
 def threaded_progress_bar_update(self):

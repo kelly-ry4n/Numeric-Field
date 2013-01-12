@@ -15,13 +15,13 @@ def plot_on_fig(fig, X, Y, Xq, Yq, F, Fq, res, direc = 'Sum'):
     """
     ## A few methods of computing UV 'magnitudes' for plotting the contours
     plot_arrow_modes = {
-                            'Magnitude'        : lambda: sqrt(U**2+V**2)   ,
-                            'Sum'                    : lambda: U+V          ,
-                            'Dot'                    : lambda: dot(U,V)     ,
-                            'Multiply'               : lambda: V*U          ,
-                            'Vertical Divergence'    : lambda: V/U          ,
-                            'Horizontal Divergence'  : lambda: U/V          ,
-                            'Division Sum'           : lambda: V/U + U/V    ,
+                            'Magnitude'              : lambda: sqrt(U**2+V**2) ,
+                            'Sum'                    : lambda: U+V             ,
+                            'Dot'                    : lambda: dot(U,V)        ,
+                            'Multiply'               : lambda: V*U             ,
+                            'Vertical Divergence'    : lambda: V/U             ,
+                            'Horizontal Divergence'  : lambda: U/V             ,
+                            'Division Sum'           : lambda: V/U + U/V       ,
                         }
 
     ax = fig.add_subplot(111)
@@ -34,10 +34,14 @@ def plot_on_fig(fig, X, Y, Xq, Yq, F, Fq, res, direc = 'Sum'):
         W = log(abs(W))
         ax.contour(X,Y,W,res)
     
+
     if Xq is not None:
         Uq = Fq[0]
         Vq = Fq[1]
         ax.quiver(Xq,Yq,Uq,Vq, pivot='mid')
+    
+
+    return fig, X, Y, Xq, Yq, F, Fq, res, direc
 
 
 

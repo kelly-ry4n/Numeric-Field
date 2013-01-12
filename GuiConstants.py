@@ -38,6 +38,18 @@ GUI_CONSTANTS["field_type_choices"] =\
     'Electric'
 ]
 
+GUI_CONSTANTS["Cache"] =\
+[ 0,0,0,0,0,0
+    #Will contain, at runtime, a cache of the text boxes,
+    #ie, domain, range, plot type, field type, command
+]
+
+GUI_CONSTANTS["Field_Cache"] =\
+[0,0,0,0,0,0,0,0,0,0
+    #Will contain the values needed to replot certain things without
+    #needing to redo all the math
+]
+
 GUI_CONSTANTS['help_string'] = \
 '''Statements:
 var(<name>,number)                 -   Assigns number to <name>
