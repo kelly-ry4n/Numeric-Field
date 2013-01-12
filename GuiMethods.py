@@ -42,7 +42,7 @@ def start_fig_update(self):
     field_type = self.field_type_selector.GetValue()
 
     xs, ys, cs = parse_dsl(self.input_text_ctrl.GetValue(),self.display_help_msg_callback)
-    print GUI_CONSTANTS['Field_Cache'][0:9]
+    
     if xs == []:
         self.set_console_msg('Input cannot be empty!\
                              Update with "help" for commands')

@@ -8,7 +8,7 @@ from numpy import abs, array, divide, dot, max, min, linspace, log, sqrt
 def plot_on_fig(fig, X, Y, Xq, Yq, F, Fq, res, direc = 'Sum'):
     """
     'fig'--> figure object, X and Y are components of meshgrid, Xq and Yq are
-    components of the same meshgrid but at a fifth the resolution, 'F'--> 2-item tuple containing the
+    components of the same meshgrid but at a fifth of the resolution, 'F'--> 2-item tuple containing the
     force in the x and y directions respectively, 'Fq' similar to 'F' but once again at a fifth the 
     resolution, 'res' is oft mentioned resolution, and 'direc' --> string matching one of the dictionary
     keys in 'plot_arrow_modes' below.
