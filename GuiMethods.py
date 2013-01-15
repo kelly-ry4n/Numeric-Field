@@ -43,6 +43,7 @@ def start_fig_update(self):
 
     xs, ys, cs = parse_dsl(self.input_text_ctrl.GetValue(),self.display_help_msg_callback)
     
+
     if xs == []:
         self.set_console_msg('Input cannot be empty!\
                              Update with "help" for commands')
@@ -61,10 +62,13 @@ def start_fig_update(self):
         
         GUI_CONSTANTS['Cache'] = [domain_x,range_y,plot_type, field_type, self.input_text_ctrl.GetValue(), vector_type]
         GUI_CONSTANTS['Field_Cache'] = [fig, X, Y, Xq, Yq, F, Fq, res, direc]
+        self.canvas.draw()
         print 'yay'
         return
 
     else:
+
+        print 'going here'
 
         fig, X, Y, Xq, Yq, F, Fq, res, direc =\
         force_field(self.figure, plot_type, vector_type,
