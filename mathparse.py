@@ -14,7 +14,6 @@ def parse(tokens):
     '''Simple recursive parser-compiler for Polish notation math experssions to
     python syntax math expressions'''
 
-    ## TODO: add other functions.. sin(), cos(), tan(), whatever
     token=tokens.popleft()
     if token=='+':
         return '('+parse(tokens)+'+'+parse(tokens)+')'
