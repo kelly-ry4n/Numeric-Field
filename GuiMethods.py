@@ -7,7 +7,8 @@ from PlotOnFig import plot_on_fig
 from Parser import parse_dsl
 from threading import Thread
 from GuiConstants import GUI_CONSTANTS
-# This is a comment
+
+
 def display_help_msg_callback(self):
     ''' Displays the help message in the output box'''
     self.set_console_msg(self.helpstr)
@@ -52,23 +53,19 @@ def start_fig_update(self):
         pass
 
     elif GUI_CONSTANTS['Cache']==[domain_x,range_y,plot_type, field_type, self.input_text_ctrl.GetValue(),vector_type]:
-        print 'nope'
         return
 
     elif GUI_CONSTANTS['Cache'][0:5]==[domain_x,range_y,plot_type, field_type, self.input_text_ctrl.GetValue()] and GUI_CONSTANTS['Cache'][5]!= vector_type:
-        ugh = GUI_CONSTANTS['Field_Cache'][0:9]
+        tmp = GUI_CONSTANTS['Field_Cache'][0:9]
         fig, X, Y, Xq, Yq, F, Fq, res, direc=\
-        plot_on_fig(ugh[0],ugh[1],ugh[2],ugh[3],ugh[4],ugh[5],ugh[6],ugh[7],direc=vector_type)
+        plot_on_fig(tmp[0],tmp[1],tmp[2],tmp[3],tmp[4],tmp[5],tmp[6],tmp[7],direc=vector_type)
         
         GUI_CONSTANTS['Cache'] = [domain_x,range_y,plot_type, field_type, self.input_text_ctrl.GetValue(), vector_type]
         GUI_CONSTANTS['Field_Cache'] = [fig, X, Y, Xq, Yq, F, Fq, res, direc]
         self.canvas.draw()
-        print 'yay'
         return
 
     else:
-
-        print 'going here'
 
         fig, X, Y, Xq, Yq, F, Fq, res, direc =\
         force_field(self.figure, plot_type, vector_type,
