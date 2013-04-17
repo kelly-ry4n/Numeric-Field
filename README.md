@@ -29,8 +29,11 @@ Type help and then update to see the following:
 
 Statements:
 point(x,y,c)                       -   Creates a point at x,y, with charge
+
 line(x1,y2, x2,y2, numpoints, c)   -   Creates a line of points, each with charge c from (x1,y1) to (x2,y2)
+
 rectangle(x1,y1,x2,y2,res, c)      -   Create a rectangle bounded by two corner points (x1,y1) and (x2,y2)where the charge
+
 density is related to res, and c gives the charge of the individual points
 
 curve(start,stop,x_curve,y_curve ,num_points,field_expression) - creates a parametric curve with num_curve points
