@@ -3,6 +3,8 @@ Numeric-Field
 
 Numeric approximations of physical field equations; Graphical results.
 
+A quite demo/writeup at http://realitycoded.com/projects/numericfield.html
+
 Requirements - Python 2.7, WXwidgits, Numpy to run from source.
 
 Windows executable available at http://realitycoded.com/downloads/numeric-field.exe
